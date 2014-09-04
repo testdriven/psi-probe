@@ -18,7 +18,7 @@
    Development and Distribution License.  For this reason, the .jar cannot be
    legally hosted in any Maven repository or distributed with PSI Probe.
 
-   a. Download version 10.2.0.1.0 of the ojdbc14.jar.
+   a. Download version 10.2.0.5.0 of the ojdbc14.jar.
 
       You may download it from the following URL:
       http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-10201-088211.html

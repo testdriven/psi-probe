@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.oracle</groupId>
 	<artifactId>ojdbc14</artifactId>
-	<version>10.2.0.1.0</version>
+	<version>10.2.0.5.0</version>
 	<packaging>jar</packaging>
 	<name>Oracle Database 10g Release 2 JDBC Driver</name>
 	<url>http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-10201-088211.html</url>
