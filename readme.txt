@@ -5,7 +5,7 @@
 1. Check out or download PSI Probe's source code.
 
    You may acquire it from the following URL:
-   http://psi-probe.googlecode.com
+   https://github.com/padcom/psi-probe
 
 2. Install Maven 2.
 
