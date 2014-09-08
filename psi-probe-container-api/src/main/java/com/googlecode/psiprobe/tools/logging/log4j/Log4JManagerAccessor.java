@@ -57,7 +57,7 @@ public class Log4JManagerAccessor extends DefaultAccessor {
         try {
             Class clazz = (Class) getTarget();
             Method m = MethodUtils.getAccessibleMethod(clazz, "getLogger", new Class[] {String.class});
-            Object logger = m.invoke(null, new Object[] {name});
+            Object logger = m.invoke(null, name);
             if (logger == null) {
                 throw new NullPointerException(getTarget().getClass().getName() + "#getLogger(\"" + name + "\") returned null");
             }

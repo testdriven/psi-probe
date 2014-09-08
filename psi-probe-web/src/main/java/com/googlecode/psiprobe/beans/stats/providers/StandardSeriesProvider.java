@@ -39,7 +39,7 @@ public class StandardSeriesProvider extends AbstractSeriesProvider {
         for (int i = 0; i < statNames.size(); i++) {
             String statName = (String) statNames.get(i);
             if (seriesParam != null) {
-                statName = MessageFormat.format(statName, new Object[]{seriesParam});
+                statName = MessageFormat.format(statName, seriesParam);
             }
             List l = statsCollection.getStats(statName);
             if (l != null) {

@@ -83,14 +83,14 @@ public class Tomcat70ContainerAdaptor extends AbstractTomcatContainer {
     public void stop(String name) throws Exception {
         Context ctx = findContext(name);
         if (ctx != null) {
-            ((Lifecycle) ctx).stop();
+            ctx.stop();
         }
     }
 
     public void start(String name) throws Exception {
         Context ctx = findContext(name);
         if (ctx != null) {
-            ((Lifecycle) ctx).start();
+            ctx.start();
         }
     }
 

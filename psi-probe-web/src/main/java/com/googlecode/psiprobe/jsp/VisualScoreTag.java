@@ -88,33 +88,33 @@ public class VisualScoreTag extends BodyTagSupport {
         }
 
         // Full red blocks
-        String fullRedBody = MessageFormat.format(body, new Object[]{partialBlocks + "+0"});
+        String fullRedBody = MessageFormat.format(body, partialBlocks + "+0");
         for (int i = 0; i < fullRedBlockCount; i++) {
             buf.append(fullRedBody);
         }
 
         // Mixed red/blue block (mid-block transition)
         if (partialRedBlockIndex > 0) {
-            String partialBody = MessageFormat.format(body, new Object[]{partialRedBlockIndex + "+" + partialBlueBlockIndex1});
+            String partialBody = MessageFormat.format(body, partialRedBlockIndex + "+" + partialBlueBlockIndex1);
             buf.append(partialBody);
         }
 
         // Full blue blocks
-        String fullBlueBody = MessageFormat.format(body, new Object[]{"0+" + partialBlocks});
+        String fullBlueBody = MessageFormat.format(body, "0+" + partialBlocks);
         for (int i = 0; i < fullBlueBlockCount; i++) {
             buf.append(fullBlueBody);
         }
 
         // Partial blue block
         if (partialBlueBlockIndex2 > 0) {
-            String partialBody = MessageFormat.format(body, new Object[]{"0+" + partialBlueBlockIndex2});
+            String partialBody = MessageFormat.format(body, "0+" + partialBlueBlockIndex2);
             buf.append(partialBody);
         }
 
         // Empty blocks
         int emptyBlocks = showEmptyBlocks ? fullBlocks - (fullRedBlockCount + fullBlueBlockCount + (partialRedBlockIndex > 0 ? 1 : 0) + (partialBlueBlockIndex2 > 0 ? 1 : 0)) : 0;
         if (emptyBlocks > 0) {
-            String emptyBody = MessageFormat.format(body, new Object[]{"0+0"});
+            String emptyBody = MessageFormat.format(body, "0+0");
             for (int i = 0; i < emptyBlocks; i++) {
                 buf.append(emptyBody);
             }

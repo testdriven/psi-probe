@@ -77,7 +77,7 @@ public class LogbackFactoryAccessor extends DefaultAccessor {
         try {
             Class clazz = getTarget().getClass();
             Method m = MethodUtils.getAccessibleMethod(clazz, "getLogger", new Class[] {String.class});
-            Object logger = m.invoke(getTarget(), new Object[] {name});
+            Object logger = m.invoke(getTarget(), name);
             if (logger == null) {
                 throw new NullPointerException(getTarget() + ".getLogger(\"" + name + "\") returned null");
             }
