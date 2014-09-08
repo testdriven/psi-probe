@@ -10,17 +10,12 @@
  */
 package com.googlecode.psiprobe.beans;
 
-import com.googlecode.psiprobe.model.Connector;
-import com.googlecode.psiprobe.model.RequestProcessor;
-import com.googlecode.psiprobe.model.ThreadPool;
-import com.googlecode.psiprobe.model.jmx.ThreadPoolObjectName;
-import com.googlecode.psiprobe.tools.JmxTools;
-import net.sf.javainetlocator.InetAddressLocator;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import javax.management.InstanceNotFoundException;
 import javax.management.MBeanServer;
 import javax.management.MBeanServerNotification;
@@ -29,13 +24,22 @@ import javax.management.NotificationListener;
 import javax.management.ObjectInstance;
 import javax.management.ObjectName;
 import javax.management.RuntimeOperationsException;
+
+import net.sf.javainetlocator.InetAddressLocator;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.googlecode.psiprobe.model.Connector;
+import com.googlecode.psiprobe.model.RequestProcessor;
+import com.googlecode.psiprobe.model.ThreadPool;
+import com.googlecode.psiprobe.model.jmx.ThreadPoolObjectName;
+import com.googlecode.psiprobe.tools.JmxTools;
 
 /**
  * This class interfaces Tomcat JMX functionality to read connection status. The
  * class essentially provides and maintains the list of connection ThreadPools.
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
@@ -230,7 +234,6 @@ public class ContainerListenerBean implements NotificationListener {
         for (Iterator it = poolNames.iterator(); it.hasNext();) {
 
             ThreadPoolObjectName threadPoolObjectName = (ThreadPoolObjectName) it.next();
-            boolean remoteAddrAvailable = true;
             try {
                 ObjectName poolName = threadPoolObjectName.getThreadPoolName();
 
@@ -266,7 +269,6 @@ public class ContainerListenerBean implements NotificationListener {
                                  * if it's not available for this request processor, then it's
                                  * not available for any request processor in this thread pool
                                  */
-                                remoteAddrAvailable = false;
                             }
                             rp.setVirtualHost(JmxTools.getStringAttr(server, wrkName, "virtualHost"));
                             rp.setMethod(JmxTools.getStringAttr(server, wrkName, "method"));

@@ -26,7 +26,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class VisualScoreTag extends BodyTagSupport {
 
-    protected Log log = LogFactory.getLog(getClass());
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected Log log = LogFactory.getLog(getClass());
 
     private double value = 0;
     private double value2 = 0;

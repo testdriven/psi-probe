@@ -17,6 +17,11 @@ import java.io.IOException;
  * @author Vlad Ilyushchenko
  */
 public class TimeoutException extends IOException {
-    public TimeoutException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public TimeoutException() {
     }
 }

@@ -20,7 +20,12 @@ import java.util.List;
  * @author Andy Shapoval
  */
 public class DataSourceTestInfo implements Serializable {
-    public static final String DS_TEST_SESS_ATTR = "dataSourceTestData";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public static final String DS_TEST_SESS_ATTR = "dataSourceTestData";
 
     List results = null;
     LinkedList queryHistory = new LinkedList();

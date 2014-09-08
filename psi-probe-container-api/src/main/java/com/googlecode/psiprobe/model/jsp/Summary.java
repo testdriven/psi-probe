@@ -18,7 +18,11 @@ import java.util.Map;
  * @author Vlad Ilyushchenko
  */
 public class Summary implements Serializable {
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String name;
     private Map items;
     private int outOfDateCount;
 

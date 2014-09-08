@@ -20,7 +20,11 @@ import java.io.Serializable;
  * @author Mark Lewis
  */
 public class Application implements Serializable {
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String name;
     private String displayName;
     private String docBase;
     private boolean available;

@@ -24,7 +24,11 @@ import org.apache.catalina.util.ServerInfo;
  */
 public class SystemInformation implements Serializable {
 
-    private String appBase;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String appBase;
     private String configBase;
     private Map systemProperties;
 

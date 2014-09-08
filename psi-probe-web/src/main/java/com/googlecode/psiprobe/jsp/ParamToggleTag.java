@@ -25,7 +25,11 @@ import org.springframework.web.bind.ServletRequestUtils;
  */
 public class ParamToggleTag extends TagSupport {
 
-    private Log logger = LogFactory.getLog(getClass());
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Log logger = LogFactory.getLog(getClass());
     private String param = "size";
 
     public int doStartTag() throws JspException {

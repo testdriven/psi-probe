@@ -30,7 +30,11 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 public class ProbeServlet extends DispatcherServlet implements ContainerServlet {
 
-    private Wrapper wrapper;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Wrapper wrapper;
 
     public Wrapper getWrapper() {
         return wrapper;

@@ -24,7 +24,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class DurationTag extends TagSupport {
 
-    private static Log logger = LogFactory.getLog(DurationTag.class);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private static Log logger = LogFactory.getLog(DurationTag.class);
 
     private long value;
 

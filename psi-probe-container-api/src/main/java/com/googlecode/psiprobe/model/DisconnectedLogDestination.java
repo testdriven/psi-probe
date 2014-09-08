@@ -25,7 +25,11 @@ import java.sql.Timestamp;
  */
 public class DisconnectedLogDestination implements LogDestination, Serializable {
 
-    private Application application;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Application application;
     private boolean root;
     private boolean context;
     private String name;

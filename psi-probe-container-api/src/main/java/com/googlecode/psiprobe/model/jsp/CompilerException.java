@@ -16,7 +16,12 @@ package com.googlecode.psiprobe.model.jsp;
  */
 public class CompilerException extends Exception {
 
-    public CompilerException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public CompilerException() {
     }
 
     public CompilerException(String message) {

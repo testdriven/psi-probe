@@ -22,7 +22,7 @@ import com.googlecode.psiprobe.tools.logging.DefaultAccessor;
 
 /**
  * Wraps a Logback logger factory from a given web application class loader.
- * 
+ *
  * <p>
  * All Logback classes are loaded via the given class loader and not via psi-probe's own
  * class loader. For this reasons, all methods on Logback objects are invoked via reflection.
@@ -30,27 +30,27 @@ import com.googlecode.psiprobe.tools.logging.DefaultAccessor;
  * <p>
  * This way, we can even handle different versions of Logback embedded in different WARs.
  * </p>
- * 
+ *
  * @author Harald Wellmann
  */
 public class LogbackFactoryAccessor extends DefaultAccessor {
 
     /**
      * Attempts to initialize a Logback logger factory via the given class loader.
-     *  
+     *
      * @param cl the ClassLoader to use when fetching the factory
      */
     public LogbackFactoryAccessor(ClassLoader cl) throws ClassNotFoundException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        // Get the singleton SLF4J binding, which may or may not be Logback, depending on the            
+        // Get the singleton SLF4J binding, which may or may not be Logback, depending on the
         // binding.
         Class clazz = cl.loadClass("org.slf4j.impl.StaticLoggerBinder");
         Method m1 = MethodUtils.getAccessibleMethod(clazz, "getSingleton", new Class[]{});
-        Object singleton = m1.invoke(null, null);
+        Object singleton = m1.invoke(null);
         Method m = MethodUtils.getAccessibleMethod(clazz, "getLoggerFactory", new Class[]{});
-        Object loggerFactory = m.invoke(singleton, null);
+        Object loggerFactory = m.invoke(singleton);
 
         // Check if the binding is indeed Logback
-        Class loggerFactoryClass = cl.loadClass("ch.qos.logback.classic.LoggerContext");            
+        Class loggerFactoryClass = cl.loadClass("ch.qos.logback.classic.LoggerContext");
         if (!loggerFactoryClass.isInstance(loggerFactory)) {
             throw new RuntimeException("The singleton SLF4J binding was not Logback");
         }
@@ -59,7 +59,7 @@ public class LogbackFactoryAccessor extends DefaultAccessor {
 
     /**
      * Returns the Logback root logger.
-     * 
+     *
      * @return the root logger
      */
     public LogbackLoggerAccessor getRootLogger() {
@@ -70,7 +70,7 @@ public class LogbackFactoryAccessor extends DefaultAccessor {
 
     /**
      * Returns the Logback logger with a given name.
-     * 
+     *
      * @return the Logger with the given name
      */
     public LogbackLoggerAccessor getLogger(String name) {
@@ -95,7 +95,7 @@ public class LogbackFactoryAccessor extends DefaultAccessor {
     /**
      * Returns a list of wrappers for all Logback appenders that have an
      * associated logger.
-     * 
+     *
      * @return a list of {@link LogbackAppenderAccessor}s representing all
      *         appenders that are in use
      */
@@ -104,7 +104,7 @@ public class LogbackFactoryAccessor extends DefaultAccessor {
         try {
             Class clazz = getTarget().getClass();
             Method m = MethodUtils.getAccessibleMethod(clazz, "getLoggerList", new Class[]{});
-            List loggers = (List) m.invoke(getTarget(), null);
+            List loggers = (List) m.invoke(getTarget());
             Iterator it = loggers.iterator();
             while (it.hasNext()) {
                 LogbackLoggerAccessor accessor = new LogbackLoggerAccessor();

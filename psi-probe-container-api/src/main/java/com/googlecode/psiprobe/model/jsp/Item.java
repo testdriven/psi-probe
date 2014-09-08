@@ -20,6 +20,11 @@ import java.util.Date;
  */
 public class Item implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
      * Item is Out Of Date and requires recompilation.
      */
     public static final int STATE_OOD = 1;

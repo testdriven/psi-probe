@@ -26,7 +26,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class VolumeTag extends TagSupport {
 
-    private Log logger = LogFactory.getLog(getClass());
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Log logger = LogFactory.getLog(getClass());
 
     private long value;
     private int fractions = 0;

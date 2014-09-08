@@ -10,15 +10,17 @@
  */
 package com.googlecode.psiprobe.tools.logging.log4j;
 
-import com.googlecode.psiprobe.tools.logging.DefaultAccessor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
 import org.apache.commons.beanutils.MethodUtils;
 
+import com.googlecode.psiprobe.tools.logging.DefaultAccessor;
+
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
@@ -37,7 +39,7 @@ public class Log4JManagerAccessor extends DefaultAccessor {
         try {
             Class clazz = (Class) getTarget();
             Method m = MethodUtils.getAccessibleMethod(clazz, "getRootLogger", new Class[]{});
-            Object logger = m.invoke(null, null);
+            Object logger = m.invoke(null);
             if (logger == null) {
                 throw new NullPointerException(getTarget().getClass().getName() + "#getRootLogger() returned null");
             }
@@ -76,7 +78,7 @@ public class Log4JManagerAccessor extends DefaultAccessor {
 
             Class clazz = (Class) getTarget();
             Method m = MethodUtils.getAccessibleMethod(clazz, "getCurrentLoggers", new Class[]{});
-            Enumeration e = (Enumeration) m.invoke(null, null);
+            Enumeration e = (Enumeration) m.invoke(null);
             while (e.hasMoreElements()) {
                 Log4JLoggerAccessor accessor = new Log4JLoggerAccessor();
                 accessor.setTarget(e.nextElement());

@@ -11,7 +11,7 @@
 package com.googlecode.psiprobe.tools;
 
 /**
- * 
+ *
  * @author Mark Lewis
  */
 public class AccessorFactory {
@@ -21,14 +21,6 @@ public class AccessorFactory {
 
     public static Accessor getInstance() {
         return getSimple();
-    }
-
-    private static Accessor getReflective() {
-        try {
-            return new ReflectiveAccessor();
-        } catch (Exception ex) {
-            return null;
-        }
     }
 
     private static Accessor getSimple() {

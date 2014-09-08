@@ -24,7 +24,11 @@ import java.util.regex.PatternSyntaxException;
  * @author Vlad Ilyushchenko
  */
 public class SessionSearchInfo implements Serializable {
-    public static final String SESS_ATTR_NAME = "sessionSearchInfo";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public static final String SESS_ATTR_NAME = "sessionSearchInfo";
     public static final String ACTION_NONE = "none";
     public static final String ACTION_APPLY = "apply";
     public static final String ACTION_CLEAR = "clear";

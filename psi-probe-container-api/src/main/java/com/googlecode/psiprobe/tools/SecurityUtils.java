@@ -12,11 +12,12 @@ package com.googlecode.psiprobe.tools;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.context.SecurityContextHolder;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
@@ -47,10 +48,6 @@ public class SecurityUtils {
             }
         }
         return result;
-    }
-
-    private static boolean userHasRole(String privilegedRole, HttpServletRequest request) {
-        return request.isUserInRole(privilegedRole);
     }
 
     private static String getPrivilegedRoles(ServletContext servletContext) {

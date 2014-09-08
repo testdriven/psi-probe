@@ -23,7 +23,11 @@ import org.apache.commons.lang.StringEscapeUtils;
  */
 public class OutTag extends BodyTagSupport {
 
-    private int maxLength = -1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int maxLength = -1;
     private boolean ellipsisRight = true;
     private Object value = null;
 

@@ -29,7 +29,12 @@ import java.util.Vector;
  */
 public class UniqueList extends Vector {
 
-    public synchronized boolean add(Object obj) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public synchronized boolean add(Object obj) {
         return add(obj, null);
     }
 
