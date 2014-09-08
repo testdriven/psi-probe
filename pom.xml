@@ -117,22 +117,22 @@
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>tomcat50adaptor</artifactId>
+				<artifactId>psi-probe-tomcat50</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>tomcat55adaptor</artifactId>
+				<artifactId>psi-probe-tomcat55</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>tomcat60adaptor</artifactId>
+				<artifactId>psi-probe-tomcat60</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>tomcat70adaptor</artifactId>
+				<artifactId>psi-probe-tomcat70</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		
