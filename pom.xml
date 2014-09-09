@@ -614,8 +614,6 @@
 
 	<modules>
 		<module>psi-probe-container-api</module>
-		<module>psi-probe-tomcat50</module>
-		<module>psi-probe-tomcat55</module>
 		<module>psi-probe-tomcat60</module>
 		<module>psi-probe-tomcat70</module>
 		<module>psi-probe-web</module>

@@ -23,14 +23,6 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>psi-probe-tomcat50</artifactId>
-        </dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>psi-probe-tomcat55</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>psi-probe-tomcat60</artifactId>
 		</dependency>
 		<dependency>
