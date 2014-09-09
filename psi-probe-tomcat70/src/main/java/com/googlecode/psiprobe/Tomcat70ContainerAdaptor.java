@@ -10,7 +10,6 @@
  */
 package com.googlecode.psiprobe;
 
-import com.googlecode.psiprobe.model.FilterMapping;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
@@ -25,7 +24,6 @@ import javax.servlet.ServletContext;
 import org.apache.catalina.Container;
 import org.apache.catalina.Context;
 import org.apache.catalina.Host;
-import org.apache.catalina.Lifecycle;
 import org.apache.catalina.Valve;
 import org.apache.catalina.Wrapper;
 import org.apache.catalina.deploy.FilterMap;
@@ -35,6 +33,7 @@ import org.apache.jasper.JspCompilationContext;
 import org.apache.jasper.Options;
 import org.apache.jasper.compiler.JspRuntimeContext;
 import org.apache.jasper.servlet.JspServletWrapper;
+import com.googlecode.psiprobe.model.FilterMapping;
 
 /**
  * 
@@ -97,7 +96,7 @@ public class Tomcat70ContainerAdaptor extends AbstractTomcatContainer {
     private void checkChanges(String name) throws Exception {
         Boolean result = (Boolean) mBeanServer.invoke(deployerOName,
                         "isServiced", new String[]{name}, new String[]{"java.lang.String"});
-        if (!result.booleanValue()) {
+        if (!result) {
             mBeanServer.invoke(deployerOName, "addServiced",
                     new String[]{name}, new String[]{"java.lang.String"});
             try {
@@ -150,18 +149,18 @@ public class Tomcat70ContainerAdaptor extends AbstractTomcatContainer {
     protected List getFilterMappings(FilterMap fmap, String dm, String filterClass) {
         String[] urls = fmap.getURLPatterns();
         String[] servlets = fmap.getServletNames();
-        List filterMappings = new ArrayList(urls.length + servlets.length);
-        for (int i = 0; i < urls.length; i++) {
+        List<FilterMapping> filterMappings = new ArrayList<FilterMapping>(urls.length + servlets.length);
+        for (String url : urls) {
             FilterMapping fm = new FilterMapping();
-            fm.setUrl(urls[i]);
+            fm.setUrl(url);
             fm.setFilterName(fmap.getFilterName());
             fm.setDispatcherMap(dm);
             fm.setFilterClass(filterClass);
             filterMappings.add(fm);
         }
-        for (int i = 0; i < servlets.length; i++) {
+        for (String servlet : servlets) {
             FilterMapping fm = new FilterMapping();
-            fm.setServletName(servlets[i]);
+            fm.setServletName(servlet);
             fm.setFilterName(fmap.getFilterName());
             fm.setDispatcherMap(dm);
             fm.setFilterClass(filterClass);
