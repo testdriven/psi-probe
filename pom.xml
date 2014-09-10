@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>net.testdriven.psiprobe</groupId>
 	<artifactId>psi-probe</artifactId>
 	<version>2.4.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>PSI Probe</name>
-	<url>http://testdriven.github.io/psi-probe</url>
 
+	<url>http://testdriven.github.io/psi-probe</url>
+	<name>PSI Probe</name>
 	<description>
 		Advanced manager and monitor for Tomcat, forked from Lambda Probe.
 	</description>
@@ -156,6 +156,7 @@
 				<groupId>com.oracle</groupId>
 				<artifactId>ucp</artifactId>
 				<version>11.2.0.1.0</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<!--
@@ -165,16 +166,37 @@
 				<groupId>com.oracle</groupId>
 				<artifactId>ojdbc14</artifactId>
 				<version>10.2.0.5.0</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.tomcat</groupId>
 				<artifactId>tomcat-jdbc</artifactId>
 				<version>7.0.27</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.jolbox</groupId>
 				<artifactId>bonecp</artifactId>
 				<version>0.7.1.RELEASE</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>c3p0</groupId>
+				<artifactId>c3p0</artifactId>
+				<version>0.9.0</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.2.1</version>
+				<scope>provided</scope>
+				<exclusions>
+					<exclusion>
+						<groupId>xerces</groupId>
+						<artifactId>xercesImpl</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<!-- Common libraries -->
@@ -334,20 +356,10 @@
 				<groupId>com.uwyn</groupId>
 				<artifactId>jhighlight</artifactId>
 				<version>1.0</version>
-			</dependency>
-			<dependency>
-				<groupId>c3p0</groupId>
-				<artifactId>c3p0</artifactId>
-				<version>0.9.0</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-dbcp</groupId>
-				<artifactId>commons-dbcp</artifactId>
-				<version>1.2.1</version>
 				<exclusions>
 					<exclusion>
-						<groupId>xerces</groupId>
-						<artifactId>xercesImpl</artifactId>
+						<groupId>javax.servlet</groupId>
+						<artifactId>servlet-api</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
@@ -355,6 +367,7 @@
 				<groupId>tanukisoft</groupId>
 				<artifactId>wrapper</artifactId>
 				<version>3.2.0</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>jfree</groupId>
