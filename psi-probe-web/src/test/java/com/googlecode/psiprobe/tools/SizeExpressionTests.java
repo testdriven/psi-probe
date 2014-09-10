@@ -11,13 +11,15 @@
 package com.googlecode.psiprobe.tools;
 
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  *
  * @author Mark Lewis
  */
-public class SizeExpressionTests {
-    
+public class SizeExpressionTests{
+
+    @Test
     public void testFormatNoDecimalBase2() {
         Assert.assertEquals(SizeExpression.format(1, 0, true), "1 B");
         Assert.assertEquals(SizeExpression.format(10, 0, true), "10 B");
@@ -28,7 +30,8 @@ public class SizeExpressionTests {
         Assert.assertEquals(SizeExpression.format(10240, 0, true), "10 KB");
         Assert.assertEquals(SizeExpression.format(10250, 0, true), "10 KB");
     }
-    
+
+    @Test
     public void testFormatNoDecimalBase10() {
         Assert.assertEquals(SizeExpression.format(1, 0, false), "1");
         Assert.assertEquals(SizeExpression.format(10, 0, false), "10");
@@ -39,7 +42,8 @@ public class SizeExpressionTests {
         Assert.assertEquals(SizeExpression.format(10240, 0, false), "10K");
         Assert.assertEquals(SizeExpression.format(10250, 0, false), "10K");
     }
-    
+
+    @Test
     public void testFormatOneDecimalBase2() {
         Assert.assertEquals(SizeExpression.format(1, 1, true), "1 B");
         Assert.assertEquals(SizeExpression.format(10, 1, true), "10 B");
@@ -50,7 +54,8 @@ public class SizeExpressionTests {
         Assert.assertEquals(SizeExpression.format(10240, 1, true), "10.0 KB");
         Assert.assertEquals(SizeExpression.format(10250, 1, true), "10.0 KB");
     }
-    
+
+    @Test
     public void testFormatOneDecimalBase10() {
         Assert.assertEquals(SizeExpression.format(1, 1, false), "1");
         Assert.assertEquals(SizeExpression.format(10, 1, false), "10");
@@ -61,7 +66,8 @@ public class SizeExpressionTests {
         Assert.assertEquals(SizeExpression.format(10240, 1, false), "10.0K");
         Assert.assertEquals(SizeExpression.format(10250, 1, false), "10.0K");
     }
-    
+
+    @Test
     public void testFormatAllPrefixesBase2() {
         Assert.assertEquals(SizeExpression.format(1, 0, true), "1 B");
         Assert.assertEquals(SizeExpression.format(1024, 0, true), "1 KB");
@@ -70,7 +76,8 @@ public class SizeExpressionTests {
         Assert.assertEquals(SizeExpression.format(1099511627776L, 0, true), "1 TB");
         Assert.assertEquals(SizeExpression.format(1125899906842624L, 0, true), "1 PB");
     }
-    
+
+    @Test
     public void testFormatAllPrefixesBase10() {
         Assert.assertEquals(SizeExpression.format(1, 0, false), "1");
         Assert.assertEquals(SizeExpression.format(1000, 0, false), "1K");
@@ -79,7 +86,8 @@ public class SizeExpressionTests {
         Assert.assertEquals(SizeExpression.format(1000000000000L, 0, false), "1T");
         Assert.assertEquals(SizeExpression.format(1000000000000000L, 0, false), "1P");
     }
-    
+
+    @Test
     public void testParseWithUnit() {
         Assert.assertEquals(SizeExpression.parse("1B"), 1);
         Assert.assertEquals(SizeExpression.parse("10B"), 10);
@@ -94,7 +102,8 @@ public class SizeExpressionTests {
         Assert.assertEquals(SizeExpression.parse("1TB"), 1099511627776L);
         Assert.assertEquals(SizeExpression.parse("1PB"), 1125899906842624L);
     }
-    
+
+    @Test
     public void testParseWithoutUnit() {
         Assert.assertEquals(SizeExpression.parse("1"), 1);
         Assert.assertEquals(SizeExpression.parse("10"), 10);
@@ -109,5 +118,5 @@ public class SizeExpressionTests {
         Assert.assertEquals(SizeExpression.parse("1T"), 1000000000000L);
         Assert.assertEquals(SizeExpression.parse("1P"), 1000000000000000L);
     }
-    
+
 }

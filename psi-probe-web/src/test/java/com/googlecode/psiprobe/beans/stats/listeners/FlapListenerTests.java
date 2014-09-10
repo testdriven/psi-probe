@@ -34,13 +34,13 @@ public class FlapListenerTests {
         listener.reset();
         add(sce, defaultInterval);
     }
-    
+
     protected void add(StatsCollectionEvent sce, int quantity) {
         for (int i = 0; i < quantity; i++) {
             listener.statsCollected(sce);
         }
     }
-    
+
     @Test
     public void testBelowThresholdNotFlapping() {
         listener.reset();
@@ -142,7 +142,7 @@ public class FlapListenerTests {
     public static class MockFlapListener extends FlapListener {
 
         private final long threshold;
-        
+
         private boolean flappingStarted;
         private boolean aboveThresholdFlappingStopped;
         private boolean belowThresholdFlappingStopped;
@@ -157,7 +157,7 @@ public class FlapListenerTests {
             setDefaultFlapLowWeight(lowWeight);
             setDefaultFlapHighWeight(highWeight);
         }
-        
+
         public void statsCollected(StatsCollectionEvent sce) {
             resetFlags();
             super.statsCollected(sce);
@@ -182,7 +182,7 @@ public class FlapListenerTests {
         protected void belowThresholdNotFlapping(StatsCollectionEvent sce) {
             belowThresholdNotFlapping = true;
         }
-        
+
         public long getThreshold(String name) {
             return threshold;
         }

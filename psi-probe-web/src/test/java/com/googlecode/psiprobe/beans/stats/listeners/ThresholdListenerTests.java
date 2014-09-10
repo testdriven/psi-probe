@@ -31,14 +31,14 @@ public class ThresholdListenerTests {
         listener.statsCollected(belowThreshold);
         Assert.assertTrue(listener.isRemainedBelowThreshold());
     }
-    
+
     @Test
     public void testFirstAboveThreshold() {
         listener.reset();
         listener.statsCollected(aboveThreshold);
         Assert.assertTrue(listener.isCrossedAboveThreshold());
     }
-    
+
     @Test
     public void testRemainBelowThreshold() {
         listener.reset();
@@ -46,7 +46,7 @@ public class ThresholdListenerTests {
         listener.statsCollected(belowThreshold);
         Assert.assertTrue(listener.isRemainedBelowThreshold());
     }
-    
+
     @Test
     public void testRemainAboveThreshold() {
         listener.reset();
@@ -54,7 +54,7 @@ public class ThresholdListenerTests {
         listener.statsCollected(aboveThreshold);
         Assert.assertTrue(listener.isRemainedAboveThreshold());
     }
-    
+
     @Test
     public void testCrossedBelowThreshold() {
         listener.reset();
@@ -62,7 +62,7 @@ public class ThresholdListenerTests {
         listener.statsCollected(belowThreshold);
         Assert.assertTrue(listener.isCrossedBelowThreshold());
     }
-    
+
     @Test
     public void testCrossedAboveThreshold() {
         listener.reset();
@@ -70,7 +70,7 @@ public class ThresholdListenerTests {
         listener.statsCollected(aboveThreshold);
         Assert.assertTrue(listener.isCrossedAboveThreshold());
     }
-    
+
     public static class MockThresholdListener extends ThresholdListener {
 
         private final long threshold;
@@ -83,7 +83,7 @@ public class ThresholdListenerTests {
         public MockThresholdListener(long threshold) {
             this.threshold = threshold;
         }
-        
+
         protected void crossedAboveThreshold(StatsCollectionEvent sce) {
             resetFlags();
             crossedAboveThreshold = true;
@@ -135,5 +135,7 @@ public class ThresholdListenerTests {
         public boolean isRemainedBelowThreshold() {
             return remainedBelowThreshold;
         }
+
     }
+
 }
