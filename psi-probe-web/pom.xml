@@ -271,6 +271,14 @@
 		<finalName>probe</finalName>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo.jspc</groupId>
 				<artifactId>jspc-maven-plugin</artifactId>
 				<dependencies>

@@ -69,6 +69,10 @@
 		<url>https://github.com:testdriven/psi-probe</url>
 	</scm>
 
+	<properties>
+		<mysql.connector.version>5.1.32</mysql.connector.version>
+	</properties>
+
 	<repositories>
 		<repository>
 			<!-- Required for jfreechart -->
@@ -511,6 +515,63 @@
 							<groupId>org.codehaus.mojo.jspc</groupId>
 							<artifactId>jspc-compiler-tomcat5</artifactId>
 							<version>2.0-alpha-3</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>2.2</version>
+					<configuration>
+						<charset>UTF-8</charset>
+						<uriEncoding>UTF-8</uriEncoding>
+						<tomcatUsers>src/main/tomcat/conf/tomcat-users.xml</tomcatUsers>
+						<additionalConfigFilesDir>${project.parent.basedir}/config/dev/tomcat/conf</additionalConfigFilesDir>
+						<systemProperties>
+							<!-- DON'T FORMAT THIS SECTION SO THAT CLOSING TAG IS IN THE NEW LINE! EVER!!! -->
+							<project.root>${project.basedir}</project.root>
+							<file.encoding>UTF-8</file.encoding>
+							<mail.smtp.host>localhost</mail.smtp.host>
+							<mail.smtp.port>2525</mail.smtp.port>
+							<mail.smtp.connectiontimeout>3000</mail.smtp.connectiontimeout>
+							<mail.smtp.timeout>3000</mail.smtp.timeout>
+							<mail.smtp.writetimeout>3000</mail.smtp.writetimeout>
+						</systemProperties>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>mysql</groupId>
+							<artifactId>mysql-connector-java</artifactId>
+							<version>${mysql.connector.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat6-maven-plugin</artifactId>
+					<version>2.2</version>
+					<configuration>
+						<charset>UTF-8</charset>
+						<uriEncoding>UTF-8</uriEncoding>
+						<tomcatUsers>src/main/tomcat/conf/tomcat-users.xml</tomcatUsers>
+						<additionalConfigFilesDir>${project.parent.basedir}/config/dev/tomcat/conf</additionalConfigFilesDir>
+						<systemProperties>
+							<!-- DON'T FORMAT THIS SECTION SO THAT CLOSING TAG IS IN THE NEW LINE! EVER!!! -->
+							<project.root>${project.basedir}</project.root>
+							<file.encoding>UTF-8</file.encoding>
+							<mail.smtp.host>localhost</mail.smtp.host>
+							<mail.smtp.port>2525</mail.smtp.port>
+							<mail.smtp.connectiontimeout>3000</mail.smtp.connectiontimeout>
+							<mail.smtp.timeout>3000</mail.smtp.timeout>
+							<mail.smtp.writetimeout>3000</mail.smtp.writetimeout>
+						</systemProperties>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>mysql</groupId>
+							<artifactId>mysql-connector-java</artifactId>
+							<version>${mysql.connector.version}</version>
 						</dependency>
 					</dependencies>
 				</plugin>
