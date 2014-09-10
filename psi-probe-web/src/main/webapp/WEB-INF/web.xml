@@ -30,7 +30,7 @@
 	</listener>
 
 	<listener>
-		<listener-class>com.googlecode.psiprobe.UptimeListener</listener-class>
+		<listener-class>net.testdriven.psiprobe.UptimeListener</listener-class>
 	</listener>
 
 	<!--
@@ -38,7 +38,7 @@
 	-->
 	<servlet>
 		<servlet-name>probe</servlet-name>
-		<servlet-class>com.googlecode.psiprobe.ProbeServlet</servlet-class>
+		<servlet-class>net.testdriven.psiprobe.ProbeServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>

@@ -18,7 +18,7 @@
 	<!--
 		Stats collection bean. Holds all stats the Probe collects
 	-->
-	<bean name="statsCollection" class="com.googlecode.psiprobe.model.stats.StatsCollection">
+	<bean name="statsCollection" class="net.testdriven.psiprobe.model.stats.StatsCollection">
 		<!--
 		The default location for the stat files is $CALALINA_BASE/work/<hostname>/<context_name>.
 		Use this property to override it.
@@ -31,17 +31,17 @@
 		JK Connector stats collector bean.
 	-->
 	<bean name="connectorStatsCollector"
-			class="com.googlecode.psiprobe.beans.stats.collectors.ConnectorStatsCollectorBean">
+			class="net.testdriven.psiprobe.beans.stats.collectors.ConnectorStatsCollectorBean">
 		<property name="listenerBean" ref="containerListener"/>
 		<property name="statsCollection" ref="statsCollection"/>
 		<property name="maxSeries">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="dataPoints" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.connector.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.connector.span}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.connector.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.connector.span}</value>
 					</list>
 				</property>
 			</bean>
@@ -52,91 +52,91 @@
 		Memory stats collector. Collects absolute usage stats for each of memory pools.
 	-->
 	<bean name="memoryStatsCollector"
-			class="com.googlecode.psiprobe.beans.stats.collectors.JvmMemoryStatsCollectorBean">
+			class="net.testdriven.psiprobe.beans.stats.collectors.JvmMemoryStatsCollectorBean">
 		<property name="jvmMemoryInfoAccessor" ref="jvmMemoryInfoAccessor"/>
 		<property name="statsCollection" ref="statsCollection"/>
 		<property name="maxSeries">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="dataPoints" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.memory.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.memory.span}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.memory.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.memory.span}</value>
 					</list>
 				</property>
 			</bean>
 		</property>
 		<property name="listeners">
 			<list>
-				<bean class="com.googlecode.psiprobe.beans.stats.listeners.MemoryPoolMailingListener">
+				<bean class="net.testdriven.psiprobe.beans.stats.listeners.MemoryPoolMailingListener">
 					<property name="mailer" ref="mailer"/>
 					<property name="defaultFlapInterval">
-						<value>${com.googlecode.psiprobe.beans.stats.listeners.flapInterval}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.listeners.flapInterval}</value>
 					</property>
 					<property name="defaultFlapStartThreshold">
-						<value>${com.googlecode.psiprobe.beans.stats.listeners.flapStartThreshold}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.listeners.flapStartThreshold}</value>
 					</property>
 					<property name="defaultFlapStopThreshold">
-						<value>${com.googlecode.psiprobe.beans.stats.listeners.flapStopThreshold}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.listeners.flapStopThreshold}</value>
 					</property>
 					<property name="defaultFlapLowWeight">
-						<value>${com.googlecode.psiprobe.beans.stats.listeners.flapLowWeight}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.listeners.flapLowWeight}</value>
 					</property>
 					<property name="defaultFlapHighWeight">
-						<value>${com.googlecode.psiprobe.beans.stats.listeners.flapHighWeight}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.listeners.flapHighWeight}</value>
 					</property>
 				</bean>
 			</list>
 		</property>
 	</bean>
 
-	<bean name="runtimeStatsCollector" class="com.googlecode.psiprobe.beans.stats.collectors.RuntimeStatsCollectorBean">
+	<bean name="runtimeStatsCollector" class="net.testdriven.psiprobe.beans.stats.collectors.RuntimeStatsCollectorBean">
 		<property name="runtimeInfoAccessorBean" ref="runtimeInfoAccessor"/>
 		<property name="statsCollection" ref="statsCollection"/>
 		<property name="maxSeries">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="dataPoints" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.runtime.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.runtime.span}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.runtime.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.runtime.span}</value>
 					</list>
 				</property>
 			</bean>
 		</property>
 	</bean>
 
-	<bean name="appStatsCollector" class="com.googlecode.psiprobe.beans.stats.collectors.AppStatsCollectorBean">
+	<bean name="appStatsCollector" class="net.testdriven.psiprobe.beans.stats.collectors.AppStatsCollectorBean">
 		<property name="containerWrapper" ref="containerWrapper"/>
 		<property name="statsCollection" ref="statsCollection"/>
 		<property name="maxSeries">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="dataPoints" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.app.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.app.span}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.app.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.app.span}</value>
 					</list>
 				</property>
 			</bean>
 		</property>
-		<property name="selfIgnored" value="${com.googlecode.psiprobe.beans.stats.collectors.app.selfIgnored}"/>
+		<property name="selfIgnored" value="${net.testdriven.psiprobe.beans.stats.collectors.app.selfIgnored}"/>
 	</bean>
 
-	<bean name="datasourceStatsCollector" class="com.googlecode.psiprobe.beans.stats.collectors.DatasourceStatsCollectorBean">
+	<bean name="datasourceStatsCollector" class="net.testdriven.psiprobe.beans.stats.collectors.DatasourceStatsCollectorBean">
 		<property name="containerWrapper" ref="containerWrapper"/>
 		<property name="statsCollection" ref="statsCollection"/>
 		<property name="maxSeries">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="dataPoints" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.datasource.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.datasource.span}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.datasource.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.datasource.span}</value>
 					</list>
 				</property>
 			</bean>
@@ -146,9 +146,9 @@
 	<!--
 		The name of SeriesProvider beans is passed on the URL, so it should be short enough
 	-->
-	<bean name="rcn" class="com.googlecode.psiprobe.beans.stats.providers.ConnectorSeriesProvider"/>
+	<bean name="rcn" class="net.testdriven.psiprobe.beans.stats.providers.ConnectorSeriesProvider"/>
 
-	<bean name="connector" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="connector" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>stat.connector.{0}.requests</value>
@@ -157,7 +157,7 @@
 		</property>
 	</bean>
 
-	<bean name="traffic" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="traffic" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>stat.connector.{0}.sent</value>
@@ -166,7 +166,7 @@
 		</property>
 	</bean>
 
-	<bean name="connector_proc_time" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="connector_proc_time" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>stat.connector.{0}.proc_time</value>
@@ -174,7 +174,7 @@
 		</property>
 	</bean>
 
-	<bean name="memory_usage" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="memory_usage" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>memory.pool.{0}</value>
@@ -182,7 +182,7 @@
 		</property>
 	</bean>
 
-	<bean name="os_memory"  class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="os_memory"  class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>os.memory.physical</value>
@@ -191,7 +191,7 @@
 		</property>
 	</bean>
 
-	<bean name="swap_usage" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="swap_usage" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>os.memory.swap</value>
@@ -199,7 +199,7 @@
 		</property>
 	</bean>
 
-	<bean name="cpu_usage" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="cpu_usage" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>os.cpu</value>
@@ -207,7 +207,7 @@
 		</property>
 	</bean>
 
-	<bean name="fd_usage" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="fd_usage" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>os.fd.open</value>
@@ -216,7 +216,7 @@
 		</property>
 	</bean>
 
-	<bean name="app_req" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="app_req" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>app.requests.{0}</value>
@@ -225,7 +225,7 @@
 		</property>
 	</bean>
 
-	<bean name="app_avg_proc_time" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="app_avg_proc_time" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>app.avg_proc_time.{0}</value>
@@ -233,7 +233,7 @@
 		</property>
 	</bean>
 
-	<bean name="total_avg_proc_time" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="total_avg_proc_time" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>total.avg_proc_time</value>
@@ -241,13 +241,13 @@
 		</property>
 	</bean>
 
-	<bean name="all_app_avg_proc_time" class="com.googlecode.psiprobe.beans.stats.providers.MultipleSeriesProvider">
+	<bean name="all_app_avg_proc_time" class="net.testdriven.psiprobe.beans.stats.providers.MultipleSeriesProvider">
 		<property name="statNamePrefix" value="app.avg_proc_time."/>
 		<property name="top" value="4"/>
 		<property name="movingAvgFrame" value="10"/>
 	</bean>
 
-	<bean name="total_req" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="total_req" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>total.requests</value>
@@ -256,13 +256,13 @@
 		</property>
 	</bean>
 
-	<bean name="all_app_req" class="com.googlecode.psiprobe.beans.stats.providers.MultipleSeriesProvider">
+	<bean name="all_app_req" class="net.testdriven.psiprobe.beans.stats.providers.MultipleSeriesProvider">
 		<property name="statNamePrefix" value="app.requests."/>
 		<property name="top" value="4"/>
 		<property name="movingAvgFrame" value="10"/>
 	</bean>
 
-	<bean name="datasource_usage" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
+	<bean name="datasource_usage" class="net.testdriven.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
 			<list>
 				<value>ds.est.{0}</value>
@@ -314,12 +314,12 @@
 		<property name="jobDetail" ref="connectorStatsJobDetail"/>
 		<property name="cronExpression">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="cronExpression" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.connector.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.connector.phase}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.connector.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.connector.phase}</value>
 					</list>
 				</property>
 			</bean>
@@ -330,12 +330,12 @@
 		<property name="jobDetail" ref="memoryStatsJobDetail"/>
 		<property name="cronExpression">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="cronExpression" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.memory.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.memory.phase}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.memory.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.memory.phase}</value>
 					</list>
 				</property>
 			</bean>
@@ -346,12 +346,12 @@
 		<property name="jobDetail" ref="runtimeStatsJobDetail"/>
 		<property name="cronExpression">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="cronExpression" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.runtime.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.runtime.phase}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.runtime.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.runtime.phase}</value>
 					</list>
 				</property>
 			</bean>
@@ -362,12 +362,12 @@
 		<property name="jobDetail" ref="appStatsJobDetail"/>
 		<property name="cronExpression">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="cronExpression" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.app.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.app.phase}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.app.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.app.phase}</value>
 					</list>
 				</property>
 			</bean>
@@ -378,12 +378,12 @@
 		<property name="jobDetail" ref="datasourceStatsJobDetail"/>
 		<property name="cronExpression">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="cronExpression" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.datasource.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.datasource.phase}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.datasource.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.collectors.datasource.phase}</value>
 					</list>
 				</property>
 			</bean>
@@ -394,12 +394,12 @@
 		<property name="jobDetail" ref="statsSerializerJobDetail"/>
 		<property name="cronExpression">
 			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
+				<property name="targetClass" value="net.testdriven.psiprobe.tools.TimeExpression" />
 				<property name="targetMethod" value="cronExpression" />
 				<property name="arguments">
 					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.serializer.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.serializer.phase}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.serializer.period}</value>
+						<value>${net.testdriven.psiprobe.beans.stats.serializer.phase}</value>
 					</list>
 				</property>
 			</bean>

@@ -23,8 +23,8 @@
 		<property name="nullValue" value="NULL" />
 		<property name="properties">
 			<props>
-				<prop key="com.googlecode.psiprobe.tools.mail.to">NULL</prop>
-				<prop key="com.googlecode.psiprobe.tools.mail.subjectPrefix">[PSI Probe] </prop>
+				<prop key="net.testdriven.psiprobe.tools.mail.to">NULL</prop>
+				<prop key="net.testdriven.psiprobe.tools.mail.subjectPrefix">[PSI Probe] </prop>
 			</props>
 		</property>
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
@@ -33,22 +33,22 @@
 	<!--
 		Helper bean to read datasource information into Probe data model.
 	-->
-	<bean id="defaultResourceResolver" class="com.googlecode.psiprobe.beans.ResourceResolverBean">
+	<bean id="defaultResourceResolver" class="net.testdriven.psiprobe.beans.ResourceResolverBean">
 		<property name="datasourceMappers">
 			<list>
-				<bean class="com.googlecode.psiprobe.beans.BoneCPDatasourceAccessor"/>
-				<bean class="com.googlecode.psiprobe.beans.C3P0DatasourceAccessor"/>
-				<bean class="com.googlecode.psiprobe.beans.DbcpDatasourceAccessor"/>
-				<bean class="com.googlecode.psiprobe.beans.TomcatJdbcPoolDatasourceAccessor"/>
-				<bean class="com.googlecode.psiprobe.beans.OracleDatasourceAccessor"/>
-				<bean class="com.googlecode.psiprobe.beans.OracleUcpDatasourceAssessor"/>
+				<bean class="net.testdriven.psiprobe.beans.BoneCPDatasourceAccessor"/>
+				<bean class="net.testdriven.psiprobe.beans.C3P0DatasourceAccessor"/>
+				<bean class="net.testdriven.psiprobe.beans.DbcpDatasourceAccessor"/>
+				<bean class="net.testdriven.psiprobe.beans.TomcatJdbcPoolDatasourceAccessor"/>
+				<bean class="net.testdriven.psiprobe.beans.OracleDatasourceAccessor"/>
+				<bean class="net.testdriven.psiprobe.beans.OracleUcpDatasourceAssessor"/>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="jbossResourceResolver" class="com.googlecode.psiprobe.beans.JBossResourceResolverBean"/>
+	<bean id="jbossResourceResolver" class="net.testdriven.psiprobe.beans.JBossResourceResolverBean"/>
 
-	<bean id="logResolver" class="com.googlecode.psiprobe.beans.LogResolverBean">
+	<bean id="logResolver" class="net.testdriven.psiprobe.beans.LogResolverBean">
 		<property name="containerWrapper" ref="containerWrapper"/>
 		<property name="stdoutFiles">
 			<list>
@@ -63,7 +63,7 @@
 	<!--
 		Helper class to allow Probe controllers to access Tomcat.
 	-->
-	<bean id="containerWrapper" class="com.googlecode.psiprobe.beans.ContainerWrapperBean">
+	<bean id="containerWrapper" class="net.testdriven.psiprobe.beans.ContainerWrapperBean">
 		<!--
 			Setting this property to true will override the server polling each
 			adaptor performs to test for compatibility.  Instead, it will use
@@ -72,8 +72,8 @@
 		<property name="forceFirstAdaptor" value="false"/>
 		<property name="adaptorClasses">
 			<list>
-				<value>com.googlecode.psiprobe.Tomcat70ContainerAdaptor</value>
-				<value>com.googlecode.psiprobe.Tomcat60ContainerAdaptor</value>
+				<value>net.testdriven.psiprobe.Tomcat70ContainerAdaptor</value>
+				<value>net.testdriven.psiprobe.Tomcat60ContainerAdaptor</value>
 			</list>
 		</property>
 		<property name="resourceResolvers">
@@ -84,21 +84,21 @@
 		</property>
 	</bean>
 
-	<bean id="containerListener" class="com.googlecode.psiprobe.beans.ContainerListenerBean">
+	<bean id="containerListener" class="net.testdriven.psiprobe.beans.ContainerListenerBean">
 		<property name="containerWrapper">
 			<ref bean="containerWrapper"/>
 		</property>
 	</bean>
 
-	<bean id="mailer" class="com.googlecode.psiprobe.tools.Mailer">
+	<bean id="mailer" class="net.testdriven.psiprobe.tools.Mailer">
 		<property name="defaultTo">
-			<value>${com.googlecode.psiprobe.tools.mail.to}</value>
+			<value>${net.testdriven.psiprobe.tools.mail.to}</value>
 		</property>
 		<property name="subjectPrefix">
-			<value>${com.googlecode.psiprobe.tools.mail.subjectPrefix}</value>
+			<value>${net.testdriven.psiprobe.tools.mail.subjectPrefix}</value>
 		</property>
 	</bean>
 
-	<bean id="runtimeInfoAccessor"   class="com.googlecode.psiprobe.beans.RuntimeInfoAccessorBean"/>
-	<bean id="jvmMemoryInfoAccessor" class="com.googlecode.psiprobe.beans.JvmMemoryInfoAccessorBean"/>
+	<bean id="runtimeInfoAccessor"   class="net.testdriven.psiprobe.beans.RuntimeInfoAccessorBean"/>
+	<bean id="jvmMemoryInfoAccessor" class="net.testdriven.psiprobe.beans.JvmMemoryInfoAccessorBean"/>
 </beans>
