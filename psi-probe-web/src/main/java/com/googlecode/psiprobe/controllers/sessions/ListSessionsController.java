@@ -10,12 +10,6 @@
  */
 package com.googlecode.psiprobe.controllers.sessions;
 
-import com.googlecode.psiprobe.controllers.ContextHandlerController;
-import com.googlecode.psiprobe.model.ApplicationSession;
-import com.googlecode.psiprobe.model.Attribute;
-import com.googlecode.psiprobe.model.SessionSearchInfo;
-import com.googlecode.psiprobe.tools.ApplicationUtils;
-import com.googlecode.psiprobe.tools.SecurityUtils;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,6 +23,12 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
+import com.googlecode.psiprobe.controllers.ContextHandlerController;
+import com.googlecode.psiprobe.model.ApplicationSession;
+import com.googlecode.psiprobe.model.Attribute;
+import com.googlecode.psiprobe.model.SessionSearchInfo;
+import com.googlecode.psiprobe.tools.ApplicationUtils;
+import com.googlecode.psiprobe.tools.SecurityUtils;
 
 /**
  * Creates the list of sessions for a particular web application or all web
@@ -73,21 +73,19 @@ public class ListSessionsController extends ContextHandlerController {
 
         // context is not specified we'll retrieve all sessions of the container
 
-        List ctxs;
+        List<Context> ctxs;
         if (context == null) {
             ctxs = getContainerWrapper().getTomcatContainer().findContexts();
         } else {
-            ctxs = new ArrayList();
+            ctxs = new ArrayList<>();
             ctxs.add(context);
         }
 
-        List sessionList = new ArrayList();
-        for (Iterator it = ctxs.iterator(); it.hasNext();) {
-            Context ctx = (Context) it.next();
+        List<ApplicationSession> sessionList = new ArrayList<>();
+        for (Context ctx : ctxs) {
             if (ctx != null && ctx.getManager() != null && (!searchInfo.isApply() || searchInfo.isUseSearch())) {
                 Session[] sessions = ctx.getManager().findSessions();
-                for (int i = 0; i < sessions.length; i++) {
-                    Session session = sessions[i];
+                for (Session session : sessions) {
                     ApplicationSession appSession = ApplicationUtils.getApplicationSession(
                             session, calcSize, searchInfo.isUseAttr());
                     if (appSession != null && matchSession(appSession, searchInfo)) {
@@ -126,9 +124,9 @@ public class ListSessionsController extends ContextHandlerController {
                 searchInfo.addErrorMessage(msa.getMessage("probe.src.sessions.search.invalid.sessionId", new Object[] {searchInfo.getSessionIdMsg()}));
             }
             if (!searchInfo.isAttrNameValid()) {
-                for (Iterator i = searchInfo.getAttrNameMsgs().iterator(); i.hasNext();) {
-                    String m = (String) i.next();
-                    searchInfo.addErrorMessage(msa.getMessage("probe.src.sessions.search.invalid.attrName", new Object[] {m}));
+                for (Object o : searchInfo.getAttrNameMsgs()) {
+                    String m = (String) o;
+                    searchInfo.addErrorMessage(msa.getMessage("probe.src.sessions.search.invalid.attrName", new Object[]{m}));
                 }
             }
             if (!searchInfo.isAgeFromValid()) {

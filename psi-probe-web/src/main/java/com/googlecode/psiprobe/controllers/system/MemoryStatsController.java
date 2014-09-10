@@ -10,11 +10,11 @@
  */
 package com.googlecode.psiprobe.controllers.system;
 
-import com.googlecode.psiprobe.beans.JvmMemoryInfoAccessorBean;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.ParameterizableViewController;
+import com.googlecode.psiprobe.beans.JvmMemoryInfoAccessorBean;
 
 /**
  * 
@@ -44,6 +44,6 @@ public class MemoryStatsController extends ParameterizableViewController {
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         return new ModelAndView(getViewName())
                 .addObject("pools", getJvmMemoryInfoAccessorBean().getPools())
-                .addObject("collectionPeriod", new Long(getCollectionPeriod()));
+                .addObject("collectionPeriod", getCollectionPeriod());
     }
 }

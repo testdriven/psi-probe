@@ -10,7 +10,6 @@
  */
 package com.googlecode.psiprobe.controllers.sql;
 
-import com.googlecode.psiprobe.controllers.ContextHandlerController;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
@@ -25,6 +24,7 @@ import javax.sql.DataSource;
 import org.apache.catalina.Context;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
+import com.googlecode.psiprobe.controllers.ContextHandlerController;
 
 /**
  * Verifies if a database connection can be established through a given
@@ -51,11 +51,10 @@ public class ConnectionTestController extends ContextHandlerController {
         } else {
             try {
                 // TODO: use Spring's jdbc template?
-                Connection conn = dataSource.getConnection();
-                try {
+                try (Connection conn = dataSource.getConnection()) {
                     DatabaseMetaData md = conn.getMetaData();
 
-                    List dbMetaData = new ArrayList();
+                    List<Map<String, String>> dbMetaData = new ArrayList<>();
 
                     addDbMetaDataEntry(dbMetaData, "probe.jsp.dataSourceTest.dbMetaData.dbProdName", md.getDatabaseProductName());
                     addDbMetaDataEntry(dbMetaData, "probe.jsp.dataSourceTest.dbMetaData.dbProdVersion", md.getDatabaseProductVersion());
@@ -64,8 +63,6 @@ public class ConnectionTestController extends ContextHandlerController {
 //                    addDbMetaDataEntry(dbMetaData, "probe.jsp.dataSourceTest.dbMetaData.jdbcVersion", String.valueOf(md.getJDBCMajorVersion()));
 
                     return new ModelAndView(getViewName(), "dbMetaData", dbMetaData);
-                } finally {
-                    conn.close();
                 }
             } catch (SQLException e) {
                 String message = getMessageSourceAccessor().getMessage("probe.src.dataSourceTest.connection.failure", new Object[] { e.getMessage() });
@@ -81,8 +78,8 @@ public class ConnectionTestController extends ContextHandlerController {
         return true;
     }
 
-    private void addDbMetaDataEntry(List list, String name, String value) {
-        Map entry = new LinkedHashMap();
+    private void addDbMetaDataEntry(List<Map<String, String>> list, String name, String value) {
+        Map<String, String> entry = new LinkedHashMap<>();
         entry.put("propertyName", getMessageSourceAccessor().getMessage(name));
         entry.put("propertyValue", value);
         list.add(entry);

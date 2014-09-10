@@ -10,9 +10,6 @@
  */
 package com.googlecode.psiprobe.controllers.threads;
 
-import com.googlecode.psiprobe.controllers.TomcatContainerController;
-import com.googlecode.psiprobe.model.java.ThreadModel;
-import com.googlecode.psiprobe.tools.Instruments;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.Context;
 import org.springframework.web.servlet.ModelAndView;
+import com.googlecode.psiprobe.controllers.TomcatContainerController;
+import com.googlecode.psiprobe.model.java.ThreadModel;
+import com.googlecode.psiprobe.tools.Instruments;
 
 /**
  * 
@@ -34,9 +34,9 @@ public class ListThreadsController extends TomcatContainerController {
         // this will help us to associate threads with applications.
         //
         List contexts = getContainerWrapper().getTomcatContainer().findContexts();
-        Map classLoaderMap = new TreeMap();
-        for (int i = 0; i < contexts.size(); i++) {
-            Context context = (Context) contexts.get(i);
+        Map<String, String> classLoaderMap = new TreeMap<>();
+        for (Object context1 : contexts) {
+            Context context = (Context) context1;
             if (context.getLoader() != null && context.getLoader().getClassLoader() != null) {
                 classLoaderMap.put(toUID(context.getLoader().getClassLoader()), context.getName());
             }
@@ -58,7 +58,7 @@ public class ListThreadsController extends TomcatContainerController {
         //
         // enumerate all Threads starting from top
         //
-        List threadList = new ArrayList();
+        List<ThreadModel> threadList = new ArrayList<>();
 
         Thread[] threads = new Thread[masterGroup.activeCount()];
         int numThreads = masterGroup.enumerate(threads);

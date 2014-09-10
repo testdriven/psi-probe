@@ -10,11 +10,8 @@
  */
 package com.googlecode.psiprobe.controllers;
 
-import com.googlecode.psiprobe.UptimeListener;
-import com.googlecode.psiprobe.Utils;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -22,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.ParameterizableViewController;
+import com.googlecode.psiprobe.UptimeListener;
+import com.googlecode.psiprobe.Utils;
 
 /**
  * 
@@ -51,7 +50,7 @@ public class DecoratorController extends ParameterizableViewController {
 
         Object uptimeStart = getServletContext().getAttribute(UptimeListener.START_TIME_KEY);
         if (uptimeStart != null && uptimeStart instanceof Long) {
-            long l = ((Long)uptimeStart).longValue();
+            long l = (Long) uptimeStart;
             long uptime = System.currentTimeMillis() - l;
             long uptime_days = uptime / (1000 * 60 * 60 * 24);
 
@@ -61,9 +60,9 @@ public class DecoratorController extends ParameterizableViewController {
             uptime = uptime % (1000 * 60 * 60);
             long uptime_mins = uptime / (1000 * 60);
 
-            request.setAttribute("uptime_days", new Long(uptime_days));
-            request.setAttribute("uptime_hours", new Long(uptime_hours));
-            request.setAttribute("uptime_mins", new Long(uptime_mins));
+            request.setAttribute("uptime_days", uptime_days);
+            request.setAttribute("uptime_hours", uptime_hours);
+            request.setAttribute("uptime_mins", uptime_mins);
         }
 
         //
@@ -72,9 +71,9 @@ public class DecoratorController extends ParameterizableViewController {
         //
         List fileNames = getMessageFileNamesForLocale(request.getLocale());
         String lang = "en";
-        for (Iterator it = fileNames.iterator(); it.hasNext(); ) {
-            String f = (String) it.next();
-            if (getServletContext().getResource(f+".properties") != null) {
+        for (Object fileName : fileNames) {
+            String f = (String) fileName;
+            if (getServletContext().getResource(f + ".properties") != null) {
                 lang = f.substring(messagesBasename.length() + 1);
                 break;
             }

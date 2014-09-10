@@ -10,12 +10,12 @@
  */
 package com.googlecode.psiprobe.controllers.sql;
 
-import com.googlecode.psiprobe.model.sql.DataSourceTestInfo;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.ParameterizableViewController;
+import com.googlecode.psiprobe.model.sql.DataSourceTestInfo;
 
 /**
  * Displays a view that allows for a database connectivity testing. Supplies
@@ -53,7 +53,7 @@ public class DataSourceTestController extends ParameterizableViewController {
                 .addObject("rowsPerPage", String.valueOf(sessData == null ? getRowsPerPage() : sessData.getRowsPerPage()))
                 .addObject("historySize", String.valueOf(sessData == null ? getHistorySize() : sessData.getHistorySize()))
                 .addObject("backURL", backURL)
-                .addObject("collectionPeriod", new Long(getCollectionPeriod()));
+                .addObject("collectionPeriod", getCollectionPeriod());
     }
 
     public long getCollectionPeriod() {

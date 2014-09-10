@@ -74,7 +74,7 @@ public class VisualScoreTag extends BodyTagSupport {
         BodyContent bc = getBodyContent();
         String body = bc.getString().trim();
 
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
 
         // Beginning
         if (showA) {

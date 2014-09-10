@@ -10,8 +10,6 @@
  */
 package com.googlecode.psiprobe.controllers.sql;
 
-import com.googlecode.psiprobe.controllers.ContextHandlerController;
-import com.googlecode.psiprobe.model.sql.DataSourceTestInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +28,8 @@ import org.apache.catalina.Context;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.HtmlUtils;
+import com.googlecode.psiprobe.controllers.ContextHandlerController;
+import com.googlecode.psiprobe.model.sql.DataSourceTestInfo;
 
 /**
  * Executes an SQL query through a given datasource to test database
@@ -83,31 +83,28 @@ public class ExecuteSqlController extends ContextHandlerController {
         if (dataSource == null) {
             request.setAttribute("errorMessage", getMessageSourceAccessor().getMessage("probe.src.dataSourceTest.resource.lookup.failure", new Object[]{resourceName}));
         } else {
-            List results = null;
-            int rowsAffected = 0;
+            List<Map<String, String>> results = null;
+            int rowsAffected;
 
             try {
                 // TODO: use Spring's jdbc template?
-                Connection conn = dataSource.getConnection();
 
-                try {
+                try (Connection conn = dataSource.getConnection()) {
                     conn.setAutoCommit(true);
-                    PreparedStatement stmt = conn.prepareStatement(sql);
 
-                    try {
+                    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                         boolean hasResultSet = stmt.execute();
 
-                        if (! hasResultSet) {
+                        if (!hasResultSet) {
                             rowsAffected = stmt.getUpdateCount();
                         } else {
-                            results = new ArrayList();
-                            ResultSet rs = stmt.getResultSet();
+                            results = new ArrayList<>();
 
-                            try {
+                            try (ResultSet rs = stmt.getResultSet()) {
                                 ResultSetMetaData metaData = rs.getMetaData();
 
-                                while(rs.next() && (maxRows < 0 || results.size() < maxRows)) {
-                                    Map record = new LinkedHashMap();
+                                while (rs.next() && (maxRows < 0 || results.size() < maxRows)) {
+                                    Map<String, String> record = new LinkedHashMap<>();
 
                                     for (int i = 1; i <= metaData.getColumnCount(); i++) {
                                         String value = rs.getString(i);
@@ -135,17 +132,11 @@ public class ExecuteSqlController extends ContextHandlerController {
 
                                     results.add(record);
                                 }
-                            } finally {
-                                rs.close();
                             }
 
                             rowsAffected = results.size();
                         }
-                    } finally {
-                        stmt.close();
                     }
-                } finally {
-                    conn.close();
                 }
 
                 // store the query results in the session attribute in order

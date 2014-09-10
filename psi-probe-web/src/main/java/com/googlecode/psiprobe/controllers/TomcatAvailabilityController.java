@@ -10,21 +10,20 @@
  */
 package com.googlecode.psiprobe.controllers;
 
-import com.googlecode.psiprobe.beans.ContainerListenerBean;
-import com.googlecode.psiprobe.model.ApplicationResource;
-import com.googlecode.psiprobe.model.DataSourceInfo;
-import com.googlecode.psiprobe.model.TomcatTestReport;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.Context;
 import org.springframework.web.servlet.ModelAndView;
+import com.googlecode.psiprobe.beans.ContainerListenerBean;
+import com.googlecode.psiprobe.model.ApplicationResource;
+import com.googlecode.psiprobe.model.DataSourceInfo;
+import com.googlecode.psiprobe.model.TomcatTestReport;
 
 /**
  * "Quick check" controller.
@@ -56,19 +55,19 @@ public class TomcatAvailabilityController extends TomcatContainerController {
 
         boolean allContextsAvailable = true;
         if (getContainerWrapper().getResourceResolver().supportsPrivateResources()) {
-            for (Iterator it = getContainerWrapper().getTomcatContainer().findContexts().iterator(); it.hasNext();) {
+            for (Object o : getContainerWrapper().getTomcatContainer().findContexts()) {
                 //
                 // make sure we skip ROOT application
                 //
-                Context appContext = (Context) it.next();
+                Context appContext = (Context) o;
 
                 allContextsAvailable = allContextsAvailable && appContext.getAvailable();
 
                 List applicationResources = getContainerWrapper().getResourceResolver().getApplicationResources(appContext);
 
-                for (Iterator it2 = applicationResources.iterator(); it2.hasNext();) {
+                for (Object applicationResource : applicationResources) {
 
-                    ApplicationResource appResource = (ApplicationResource) it2.next();
+                    ApplicationResource appResource = (ApplicationResource) applicationResource;
 
                     DataSourceInfo dsi = appResource.getDataSourceInfo();
                     if (dsi != null && dsi.getBusyScore() > tomcatTestReport.getDatasourceUsageScore()) {
@@ -84,8 +83,8 @@ public class TomcatAvailabilityController extends TomcatContainerController {
 
         } else {
             List l = getContainerWrapper().getResourceResolver().getApplicationResources();
-            for (int i = 0; i < l.size(); i++) {
-                ApplicationResource resource = (ApplicationResource)l.get(i);
+            for (Object aL : l) {
+                ApplicationResource resource = (ApplicationResource) aL;
                 DataSourceInfo dsi = resource.getDataSourceInfo();
                 if (dsi != null && dsi.getBusyScore() > tomcatTestReport.getDatasourceUsageScore()) {
                     tomcatTestReport.setDatasourceUsageScore(dsi.getBusyScore());
@@ -122,8 +121,8 @@ public class TomcatAvailabilityController extends TomcatContainerController {
         //
         File tmpDir = new File(System.getProperty("java.io.tmpdir"));
         int fileCount = tomcatTestReport.getDefaultFileCount();
-        List files = new ArrayList();
-        List fileStreams = new ArrayList();
+        List<File> files = new ArrayList<>();
+        List<FileOutputStream> fileStreams = new ArrayList<>();
 
         try {
             for (; fileCount > 0; fileCount --) {
@@ -137,15 +136,15 @@ public class TomcatAvailabilityController extends TomcatContainerController {
         } catch (IOException e) {
             tomcatTestReport.setFileTest(TomcatTestReport.TEST_FAILED);
         } finally {
-            for (int i = 0; i < fileStreams.size(); i++) {
+            for (FileOutputStream fileStream : fileStreams) {
                 try {
-                    ((FileOutputStream) fileStreams.get(i)).close();
-                } catch (IOException e) {
+                    fileStream.close();
+                } catch (IOException ignored) {
                 }
             }
 
-            for (int i = 0; i < files.size(); i++) {
-                ((File) files.get(i)).delete();
+            for (File file : files) {
+                file.delete();
             }
         }
 

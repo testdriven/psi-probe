@@ -149,7 +149,7 @@ public class Tomcat70ContainerAdaptor extends AbstractTomcatContainer {
     protected List getFilterMappings(FilterMap fmap, String dm, String filterClass) {
         String[] urls = fmap.getURLPatterns();
         String[] servlets = fmap.getServletNames();
-        List<FilterMapping> filterMappings = new ArrayList<FilterMapping>(urls.length + servlets.length);
+        List<FilterMapping> filterMappings = new ArrayList<>(urls.length + servlets.length);
         for (String url : urls) {
             FilterMapping fm = new FilterMapping();
             fm.setUrl(url);
@@ -210,13 +210,7 @@ public class Tomcat70ContainerAdaptor extends AbstractTomcatContainer {
                             JspServletWrapper.class,
                             JspRuntimeContext.class
                         });
-            } catch (NoSuchMethodException ex) {
-                throw new RuntimeException(ex);
-            } catch (IllegalAccessException ex) {
-                throw new RuntimeException(ex);
-            } catch (InvocationTargetException ex) {
-                throw new RuntimeException(ex);
-            } catch (InstantiationException ex) {
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException ex) {
                 throw new RuntimeException(ex);
             }
         }

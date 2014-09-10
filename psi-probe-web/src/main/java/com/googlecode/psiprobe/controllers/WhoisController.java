@@ -10,7 +10,6 @@
  */
 package com.googlecode.psiprobe.controllers;
 
-import com.googlecode.psiprobe.tools.Whois;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.ParameterizableViewController;
+import com.googlecode.psiprobe.tools.Whois;
 
 /**
  * 
@@ -60,7 +60,7 @@ public class WhoisController extends ParameterizableViewController {
     }
 
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List lines = null;
+        List<String> lines = null;
         boolean timeout = false;
         String reverseName = null;
 
@@ -74,15 +74,12 @@ public class WhoisController extends ParameterizableViewController {
         }
 
         if (wh != null) {
-            lines = new ArrayList(50);
-            BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(wh.getSummary().getBytes())));
-            try {
+            lines = new ArrayList<>(50);
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(wh.getSummary().getBytes())))) {
                 String line;
-                while ( (line = br.readLine()) != null) {
+                while ((line = br.readLine()) != null) {
                     lines.add(line);
                 }
-            } finally {
-                br.close();
             }
         }
 
@@ -94,7 +91,7 @@ public class WhoisController extends ParameterizableViewController {
             }
         }
         return new ModelAndView(getViewName(), "result", lines).
-                addObject("timeout", Boolean.valueOf(timeout)).
+                addObject("timeout", timeout).
                 addObject("whoisServer", wh != null ? wh.getServer() + ":"+ wh.getPort() : defaultServer + ":" + defaultPort).
                 addObject("domainName", reverseName);
     }

@@ -10,7 +10,6 @@
  */
 package com.googlecode.psiprobe.controllers.sessions;
 
-import com.googlecode.psiprobe.controllers.TomcatContainerController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.Context;
@@ -19,6 +18,7 @@ import org.apache.catalina.Session;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.InternalResourceView;
+import com.googlecode.psiprobe.controllers.TomcatContainerController;
 
 /**
  * Expires a list of sessionIDs. Accepts a list of sid_webapp parameters that
@@ -31,9 +31,9 @@ import org.springframework.web.servlet.view.InternalResourceView;
 public class ExpireSessionsController extends TomcatContainerController {
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String[] sidWebApps = ServletRequestUtils.getStringParameters(request, "sid_webapp");
-        for (int i = 0; i < sidWebApps.length; i++) {
-            if (sidWebApps[i] != null) {
-                String[] ss = sidWebApps[i].split(";");
+        for (String sidWebApp : sidWebApps) {
+            if (sidWebApp != null) {
+                String[] ss = sidWebApp.split(";");
                 if (ss.length == 2) {
                     String sessionId = ss[0];
                     String appName = ss[1];

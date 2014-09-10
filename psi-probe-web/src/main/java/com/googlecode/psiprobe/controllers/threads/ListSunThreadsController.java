@@ -10,9 +10,6 @@
  */
 package com.googlecode.psiprobe.controllers.threads;
 
-import com.googlecode.psiprobe.model.SunThread;
-import com.googlecode.psiprobe.model.ThreadStackElement;
-import com.googlecode.psiprobe.tools.JmxTools;
 import java.util.ArrayList;
 import java.util.List;
 import javax.management.MBeanServer;
@@ -23,6 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.modeler.Registry;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.ParameterizableViewController;
+import com.googlecode.psiprobe.model.SunThread;
+import com.googlecode.psiprobe.model.ThreadStackElement;
+import com.googlecode.psiprobe.tools.JmxTools;
 
 /**
  * 
@@ -32,7 +32,7 @@ public class ListSunThreadsController extends ParameterizableViewController {
 
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        List threads = null;
+        List<SunThread> threads = null;
         int executionStackDepth = 1;
 
         MBeanServer mBeanServer = new Registry().getMBeanServer();
@@ -42,11 +42,11 @@ public class ListSunThreadsController extends ParameterizableViewController {
         long[] allIds = (long[]) mBeanServer.getAttribute(threadingOName, "AllThreadIds");
 
         if (allIds != null) {
-            threads = new ArrayList(allIds.length);
+            threads = new ArrayList<>(allIds.length);
 
-            for (int i = 0; i < allIds.length; i++) {
+            for (long allId : allIds) {
                 CompositeData cd = (CompositeData) mBeanServer.invoke(threadingOName, "getThreadInfo",
-                        new Object[]{new Long(allIds[i]), new Integer(executionStackDepth)}, new String[]{"long", "int"});
+                        new Object[]{allId, executionStackDepth}, new String[]{"long", "int"});
 
                 if (cd != null) {
                     SunThread st = new SunThread();
@@ -82,8 +82,8 @@ public class ListSunThreadsController extends ParameterizableViewController {
 
     private static boolean contains(long[] array, long e) {
         if (array != null) {
-            for (int i = 0; i < array.length; i++) {
-                if (array[i] == e) {
+            for (long element : array) {
+                if (element == e) {
                     return true;
                 }
             }

@@ -10,18 +10,17 @@
  */
 package com.googlecode.psiprobe.controllers.system;
 
-import com.googlecode.psiprobe.beans.RuntimeInfoAccessorBean;
-import com.googlecode.psiprobe.controllers.TomcatContainerController;
-import com.googlecode.psiprobe.model.SystemInformation;
-import com.googlecode.psiprobe.tools.SecurityUtils;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
+import com.googlecode.psiprobe.beans.RuntimeInfoAccessorBean;
+import com.googlecode.psiprobe.controllers.TomcatContainerController;
+import com.googlecode.psiprobe.model.SystemInformation;
+import com.googlecode.psiprobe.tools.SecurityUtils;
 
 /**
  * Creates an instance of SystemInformation POJO.
@@ -68,8 +67,8 @@ public class SysInfoController extends TomcatContainerController {
         sysProps.putAll(System.getProperties());
 
         if (!SecurityUtils.hasAttributeValueRole(getServletContext(), request)) {
-            for (Iterator it = filterOutKeys.iterator(); it.hasNext();) {
-                sysProps.remove(it.next());
+            for (Object filterOutKey : filterOutKeys) {
+                sysProps.remove(filterOutKey);
             }
         }
 
@@ -78,6 +77,6 @@ public class SysInfoController extends TomcatContainerController {
         return new ModelAndView(getViewName())
                 .addObject("systemInformation", systemInformation)
                 .addObject("runtime", getRuntimeInfoAccessor().getRuntimeInformation())
-                .addObject("collectionPeriod", new Long(getCollectionPeriod()));
+                .addObject("collectionPeriod", getCollectionPeriod());
     }
 }
