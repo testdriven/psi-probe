@@ -16,7 +16,7 @@
 	</description>
 
 	<properties>
-		<tomcat.version>7.0.55</tomcat.version>
+		<tomcat.version>7.0.53</tomcat.version>
 	</properties>
 
 	<dependencies>
@@ -24,6 +24,10 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>psi-probe-container-api</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-catalina</artifactId>
