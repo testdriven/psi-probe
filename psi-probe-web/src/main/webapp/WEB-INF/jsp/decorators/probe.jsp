@@ -80,11 +80,6 @@
 					</a>
 				</li>
 				<li>
-					<a class="${navTabCluster}" href="<c:url value='/cluster.htm'/>">
-						<spring:message code="probe.jsp.menu.cluster"/>
-					</a>
-				</li>
-				<li>
 					<a class="${navTabSystem}" href="<c:url value='/sysinfo.htm'/>">
 						<spring:message code="probe.jsp.menu.sysinfo"/>
 					</a>
@@ -140,11 +135,6 @@
 				<li>
 					<a href="<c:url value='/threads.htm'/>">
 						<spring:message code="probe.jsp.menu.threads"/>
-					</a>
-				</li>
-				<li>
-					<a href="<c:url value='/cluster.htm'/>">
-						<spring:message code="probe.jsp.menu.cluster"/>
 					</a>
 				</li>
 				<li>

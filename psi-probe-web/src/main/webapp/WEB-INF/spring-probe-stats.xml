@@ -49,28 +49,6 @@
 	</bean>
 
 	<!--
-		Cluster stats collector
-	-->
-	<bean name="clusterStatsCollector"
-			class="com.googlecode.psiprobe.beans.stats.collectors.ClusterStatsCollectorBean">
-		<property name="clusterWrapper" ref="clusterWrapper"/>
-		<property name="containerWrapper" ref="containerWrapper"/>
-		<property name="statsCollection" ref="statsCollection"/>
-		<property name="maxSeries">
-			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
-				<property name="targetMethod" value="dataPoints" />
-				<property name="arguments">
-					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.cluster.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.cluster.span}</value>
-					</list>
-				</property>
-			</bean>
-		</property>
-	</bean>
-
-	<!--
 		Memory stats collector. Collects absolute usage stats for each of memory pools.
 	-->
 	<bean name="memoryStatsCollector"
@@ -169,24 +147,6 @@
 		The name of SeriesProvider beans is passed on the URL, so it should be short enough
 	-->
 	<bean name="rcn" class="com.googlecode.psiprobe.beans.stats.providers.ConnectorSeriesProvider"/>
-
-	<bean name="cl_traffic" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
-		<property name="statNames">
-			<list>
-				<value>cluster.sent</value>
-				<value>cluster.received</value>
-			</list>
-		</property>
-	</bean>
-
-	<bean name="cl_request" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
-		<property name="statNames">
-			<list>
-				<value>cluster.req.sent</value>
-				<value>cluster.req.received</value>
-			</list>
-		</property>
-	</bean>
 
 	<bean name="connector" class="com.googlecode.psiprobe.beans.stats.providers.StandardSeriesProvider">
 		<property name="statNames">
@@ -320,12 +280,6 @@
 		<property name="concurrent" value="false"/>
 	</bean>
 
-	<bean id="clusterStatsJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="clusterStatsCollector"/>
-		<property name="targetMethod" value="collect"/>
-		<property name="concurrent" value="false"/>
-	</bean>
-
 	<bean id="memoryStatsJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="memoryStatsCollector"/>
 		<property name="targetMethod" value="collect"/>
@@ -366,22 +320,6 @@
 					<list>
 						<value>${com.googlecode.psiprobe.beans.stats.collectors.connector.period}</value>
 						<value>${com.googlecode.psiprobe.beans.stats.collectors.connector.phase}</value>
-					</list>
-				</property>
-			</bean>
-		</property>
-	</bean>
-
-	<bean id="clusterStatsTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
-		<property name="jobDetail" ref="clusterStatsJobDetail"/>
-		<property name="cronExpression">
-			<bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-				<property name="targetClass" value="com.googlecode.psiprobe.tools.TimeExpression" />
-				<property name="targetMethod" value="cronExpression" />
-				<property name="arguments">
-					<list>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.cluster.period}</value>
-						<value>${com.googlecode.psiprobe.beans.stats.collectors.cluster.phase}</value>
 					</list>
 				</property>
 			</bean>
@@ -472,7 +410,6 @@
 		<property name="triggers">
 			<list>
 				<ref local="connectorStatsTrigger"/>
-				<ref local="clusterStatsTrigger"/>
 				<ref local="memoryStatsTrigger"/>
 				<ref local="runtimeStatsTrigger"/>
 				<ref local="appStatsTrigger"/>
