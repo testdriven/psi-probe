@@ -10,7 +10,7 @@
  */
 package com.googlecode.psiprobe.tools;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 /**
  *
