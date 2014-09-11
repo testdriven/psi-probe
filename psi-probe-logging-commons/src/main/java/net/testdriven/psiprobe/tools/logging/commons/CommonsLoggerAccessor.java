@@ -10,9 +10,9 @@
  */
 package net.testdriven.psiprobe.tools.logging.commons;
 
+import java.util.List;
 import net.testdriven.psiprobe.tools.logging.DefaultAccessor;
 import net.testdriven.psiprobe.tools.logging.LogDestination;
-import java.util.List;
 
 /**
  * 
@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class CommonsLoggerAccessor extends DefaultAccessor {
 
-    public List getDestinations() {
+    public List<LogDestination> getDestinations() {
         GetAllDestinationsVisitor v = new GetAllDestinationsVisitor();
         v.setTarget(getTarget());
         v.setApplication(getApplication());

@@ -14,10 +14,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-
-import org.apache.commons.beanutils.MethodUtils;
-
 import net.testdriven.psiprobe.tools.logging.DefaultAccessor;
+import net.testdriven.psiprobe.tools.logging.LogDestination;
+import org.apache.commons.beanutils.MethodUtils;
 
 /**
  *
@@ -71,8 +70,8 @@ public class Log4JManagerAccessor extends DefaultAccessor {
         return null;
     }
 
-    public List getAppenders() {
-        List appenders = new ArrayList();
+    public List<LogDestination> getAppenders() {
+        List<LogDestination> appenders = new ArrayList<>();
         try {
             appenders.addAll(getRootLogger().getAppenders());
 

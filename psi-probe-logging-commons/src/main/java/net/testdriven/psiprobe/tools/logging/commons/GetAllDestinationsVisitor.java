@@ -10,10 +10,11 @@
  */
 package net.testdriven.psiprobe.tools.logging.commons;
 
-import net.testdriven.psiprobe.tools.logging.jdk.Jdk14LoggerAccessor;
-import net.testdriven.psiprobe.tools.logging.log4j.Log4JLoggerAccessor;
 import java.util.ArrayList;
 import java.util.List;
+import net.testdriven.psiprobe.tools.logging.LogDestination;
+import net.testdriven.psiprobe.tools.logging.jdk.Jdk14LoggerAccessor;
+import net.testdriven.psiprobe.tools.logging.log4j.Log4JLoggerAccessor;
 
 /**
  *
@@ -21,9 +22,9 @@ import java.util.List;
  */
 public class GetAllDestinationsVisitor extends LoggerAccessorVisitor {
 
-    private List destinations = new ArrayList();
+    private List<LogDestination> destinations = new ArrayList<>();
 
-    public List getDestinations() {
+    public List<LogDestination> getDestinations() {
         return destinations;
     }
 

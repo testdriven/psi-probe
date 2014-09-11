@@ -10,11 +10,11 @@
  */
 package net.testdriven.psiprobe.controllers.logs;
 
-import net.testdriven.psiprobe.tools.logging.LogDestination;
 import java.io.File;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.testdriven.psiprobe.tools.logging.LogDestination;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -26,7 +26,7 @@ public class SetupFollowController extends LogHandlerController {
 
     protected ModelAndView handleLogFile(HttpServletRequest request, HttpServletResponse response, LogDestination logDest) throws Exception {
         File logFile = logDest.getFile();
-        List sources = getLogResolver().getLogSources(logFile);
+        List<LogDestination> sources = getLogResolver().getLogSources(logFile);
         return new ModelAndView(getViewName())
                 .addObject("log", logDest)
                 .addObject("sources", sources);

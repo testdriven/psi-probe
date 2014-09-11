@@ -13,12 +13,10 @@ package net.testdriven.psiprobe.tools.logging.logback;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import org.apache.commons.beanutils.MethodUtils;
-
 import net.testdriven.psiprobe.tools.logging.DefaultAccessor;
+import net.testdriven.psiprobe.tools.logging.LogDestination;
+import org.apache.commons.beanutils.MethodUtils;
 
 /**
  * Wraps a Logback logger factory from a given web application class loader.
@@ -99,16 +97,15 @@ public class LogbackFactoryAccessor extends DefaultAccessor {
      * @return a list of {@link LogbackAppenderAccessor}s representing all
      *         appenders that are in use
      */
-    public List getAppenders() {
-        List appenders = new ArrayList();
+    public List<LogDestination> getAppenders() {
+        List<LogDestination> appenders = new ArrayList<>();
         try {
             Class clazz = getTarget().getClass();
             Method m = MethodUtils.getAccessibleMethod(clazz, "getLoggerList", new Class[]{});
             List loggers = (List) m.invoke(getTarget());
-            Iterator it = loggers.iterator();
-            while (it.hasNext()) {
+            for (Object logger : loggers) {
                 LogbackLoggerAccessor accessor = new LogbackLoggerAccessor();
-                accessor.setTarget(it.next());
+                accessor.setTarget(logger);
                 accessor.setApplication(getApplication());
 
                 appenders.addAll(accessor.getAppenders());

@@ -10,10 +10,11 @@
  */
 package net.testdriven.psiprobe.tools.logging.logback;
 
-import net.testdriven.psiprobe.tools.logging.DefaultAccessor;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import net.testdriven.psiprobe.tools.logging.DefaultAccessor;
+import net.testdriven.psiprobe.tools.logging.LogDestination;
 import org.apache.commons.beanutils.MethodUtils;
 
 /**
@@ -29,16 +30,15 @@ public class LogbackLoggerAccessor extends DefaultAccessor {
      * 
      * @return a list of {@link LogbackAppenderAccessor}s
      */
-    public List getAppenders() {
-        List appenders = new ArrayList();
+    public List<LogDestination> getAppenders() {
+        List<LogDestination> appenders = new ArrayList<>();
         try {
             Iterator it =  (Iterator) MethodUtils.invokeMethod(getTarget(), "iteratorForAppenders", null);
             while (it.hasNext()) {
                 Object appender = it.next();
                 List siftedAppenders = getSiftedAppenders(appender);
                 if (siftedAppenders != null) {
-                    for (int i = 0; i < siftedAppenders.size(); i++) {
-                        Object siftedAppender = siftedAppenders.get(i);
+                    for (Object siftedAppender : siftedAppenders) {
                         wrapAndAddAppender(siftedAppender, appenders);
                     }
                 } else {
@@ -63,8 +63,8 @@ public class LogbackLoggerAccessor extends DefaultAccessor {
             Object appender = MethodUtils.invokeMethod(getTarget(), "getAppender", name);
             if (appender == null) {
                 List appenders = getAppenders();
-                for (int i = 0; i < appenders.size(); i++) {
-                    LogbackAppenderAccessor wrappedAppender = (LogbackAppenderAccessor) appenders.get(i);
+                for (Object appender1 : appenders) {
+                    LogbackAppenderAccessor wrappedAppender = (LogbackAppenderAccessor) appender1;
                     if (wrappedAppender.getIndex().equals(name)) {
                         return wrappedAppender;
                     }
@@ -132,7 +132,7 @@ public class LogbackLoggerAccessor extends DefaultAccessor {
         }
     }
 
-    private void wrapAndAddAppender(Object appender, List appenders) {
+    private void wrapAndAddAppender(Object appender, List<LogDestination> appenders) {
         LogbackAppenderAccessor appenderAccessor = wrapAppender(appender);
         if (appenderAccessor != null) {
             appenders.add(appenderAccessor);

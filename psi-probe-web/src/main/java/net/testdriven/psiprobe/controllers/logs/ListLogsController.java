@@ -10,10 +10,11 @@
  */
 package net.testdriven.psiprobe.controllers.logs;
 
-import net.testdriven.psiprobe.beans.LogResolverBean;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.testdriven.psiprobe.beans.LogResolverBean;
+import net.testdriven.psiprobe.tools.logging.LogDestination;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.ParameterizableViewController;
@@ -47,7 +48,7 @@ public class ListLogsController extends ParameterizableViewController {
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         boolean showAll = ServletRequestUtils.getBooleanParameter(request, "apps", false);
-        List uniqueList = logResolver.getLogDestinations(showAll);
+        List<LogDestination> uniqueList = logResolver.getLogDestinations(showAll);
         if (uniqueList != null) {
             return new ModelAndView(getViewName())
                     .addObject("logs", uniqueList);
