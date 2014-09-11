@@ -10,11 +10,13 @@
  */
 package net.testdriven.psiprobe;
 
-import net.testdriven.psiprobe.beans.ContainerWrapperBean;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.testdriven.psiprobe.beans.ContainerWrapperBean;
+
 import org.apache.catalina.ContainerServlet;
 import org.apache.catalina.Wrapper;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -24,28 +26,27 @@ import org.springframework.web.servlet.DispatcherServlet;
  * superceeded to handle "privileged" application context features. The actual
  * requirement is to capture passed Wrapper instance into ContainerWrapperBean.
  * Wrapper instance is our gateway to Tomcat.
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
 public class ProbeServlet extends DispatcherServlet implements ContainerServlet {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Wrapper wrapper;
 
-    public Wrapper getWrapper() {
+    @Override
+	public Wrapper getWrapper() {
         return wrapper;
     }
 
-    public void setWrapper(Wrapper wrapper) {
+    @Override
+	public void setWrapper(Wrapper wrapper) {
         this.wrapper = wrapper;
         logger.info("setWrapper() called");
     }
 
-    public void init(ServletConfig config) throws ServletException {
+    @Override
+	public void init(ServletConfig config) throws ServletException {
         super.init(config);
         if (wrapper != null) {
             getContainerWrapperBean().setWrapper(wrapper);
@@ -54,12 +55,14 @@ public class ProbeServlet extends DispatcherServlet implements ContainerServlet 
         }
     }
 
-    protected void doDispatch(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+    @Override
+	protected void doDispatch(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         httpServletRequest.setCharacterEncoding("UTF-8");
         super.doDispatch(httpServletRequest, httpServletResponse);
     }
 
-    public void destroy() {
+    @Override
+	public void destroy() {
         getContainerWrapperBean().setWrapper(null);
         super.destroy();
     }

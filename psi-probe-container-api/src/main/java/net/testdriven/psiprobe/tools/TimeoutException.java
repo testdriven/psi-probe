@@ -13,13 +13,10 @@ package net.testdriven.psiprobe.tools;
 import java.io.IOException;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  */
 public class TimeoutException extends IOException {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public TimeoutException() {

@@ -11,21 +11,19 @@
 package net.testdriven.psiprobe.jsp;
 
 import java.io.IOException;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
+
 import org.apache.commons.lang.StringEscapeUtils;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
 public class OutTag extends BodyTagSupport {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int maxLength = -1;
     private boolean ellipsisRight = true;
@@ -55,7 +53,8 @@ public class OutTag extends BodyTagSupport {
         this.ellipsisRight = ellipsisRight;
     }
 
-    public int doStartTag() throws JspException {
+    @Override
+	public int doStartTag() throws JspException {
         if (value != null) {
             print(value.toString(), pageContext.getOut());
             return SKIP_BODY;
@@ -64,7 +63,8 @@ public class OutTag extends BodyTagSupport {
         }
     }
 
-    public int doAfterBody() throws JspException {
+    @Override
+	public int doAfterBody() throws JspException {
         print(getBodyContent().getString().trim(), getBodyContent().getEnclosingWriter());
         return SKIP_BODY;
     }

@@ -10,24 +10,21 @@
  */
 package net.testdriven.psiprobe.model;
 
-import net.testdriven.psiprobe.tools.logging.LogDestination;
 import java.io.File;
 import java.io.Serializable;
 import java.sql.Timestamp;
+
+import net.testdriven.psiprobe.tools.logging.LogDestination;
 
 /**
  * This class holds attributes of any other LogDestination so that LogDestination can be serialized.
  * It is generally difficult to make just any LogDestination to be serializable as they more often then not
  * are connected to underlying Log implementation that are in many cases not serializable.
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
 public class DisconnectedLogDestination implements LogDestination, Serializable {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Application application;
     private boolean root;
@@ -59,55 +56,68 @@ public class DisconnectedLogDestination implements LogDestination, Serializable 
         this.validLevels = destination.getValidLevels();
     }
 
-    public Application getApplication() {
+    @Override
+	public Application getApplication() {
         return application;
     }
 
-    public boolean isRoot() {
+    @Override
+	public boolean isRoot() {
         return root;
     }
 
-    public boolean isContext() {
+    @Override
+	public boolean isContext() {
         return context;
     }
 
-    public String getName() {
+    @Override
+	public String getName() {
         return name;
     }
 
-    public String getIndex() {
+    @Override
+	public String getIndex() {
         return index;
     }
 
-    public String getTargetClass() {
+    @Override
+	public String getTargetClass() {
         return targetClass;
     }
 
-    public String getConversionPattern() {
+    @Override
+	public String getConversionPattern() {
         return conversionPattern;
     }
 
-    public File getFile() {
+    @Override
+	public File getFile() {
         return file;
     }
 
-    public String getLogType() {
+    @Override
+	public String getLogType() {
         return logType;
     }
 
-    public long getSize() {
+    @Override
+	public long getSize() {
         return size;
     }
 
-    public Timestamp getLastModified() {
+    @Override
+	public Timestamp getLastModified() {
         return lastModified;
     }
 
-    public String getLevel() {
+    @Override
+	public String getLevel() {
         return level;
     }
 
-    public String[] getValidLevels() {
+    @Override
+	public String[] getValidLevels() {
         return validLevels;
     }
 

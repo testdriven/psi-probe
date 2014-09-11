@@ -10,25 +10,24 @@
  */
 package net.testdriven.psiprobe.jsp;
 
-import net.testdriven.psiprobe.tools.SizeExpression;
 import java.io.IOException;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
+
+import net.testdriven.psiprobe.tools.SizeExpression;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
  * JSP tag to convert size from bytes into human readable form: KB, MB, GB or TB
  * depending on how large the value in bytes is.
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
 public class VolumeTag extends TagSupport {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Log logger = LogFactory.getLog(getClass());
@@ -48,7 +47,8 @@ public class VolumeTag extends TagSupport {
         this.fractions = fractions;
     }
 
-    public int doStartTag() throws JspException {
+    @Override
+	public int doStartTag() throws JspException {
         String title = Long.toString(value);
         String newValue = SizeExpression.format(value, fractions, true);
         try {

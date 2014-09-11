@@ -28,12 +28,9 @@ import java.util.Vector;
  * @author Vlad Ilyushchenko
  */
 public class UniqueList extends Vector {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	public synchronized boolean add(Object obj) {
         return add(obj, null);
     }
@@ -56,11 +53,13 @@ public class UniqueList extends Vector {
         }
     }
 
-    public synchronized void insertElementAt(Object obj, int index) {
+    @Override
+	public synchronized void insertElementAt(Object obj, int index) {
         add(obj);
     }
 
-    public synchronized boolean addAll(Collection c) {
+    @Override
+	public synchronized boolean addAll(Collection c) {
         boolean ok = this != c;
         if (ok) {
             Iterator iterator = c.iterator();

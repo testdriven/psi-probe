@@ -10,14 +10,16 @@
  */
 package net.testdriven.psiprobe.tools.logging.log4j;
 
-import net.testdriven.psiprobe.tools.logging.DefaultAccessor;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+
+import net.testdriven.psiprobe.tools.logging.DefaultAccessor;
+
 import org.apache.commons.beanutils.MethodUtils;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
@@ -25,8 +27,8 @@ public class Log4JLoggerAccessor extends DefaultAccessor {
 
     private boolean context = false;
 
-    public List getAppenders() {
-        List appenders = new ArrayList();
+    public List<Log4JAppenderAccessor> getAppenders() {
+        List<Log4JAppenderAccessor> appenders = new ArrayList<>();
         try {
             Enumeration e = (Enumeration) MethodUtils.invokeMethod(getTarget(), "getAllAppenders", null);
             while(e.hasMoreElements()) {

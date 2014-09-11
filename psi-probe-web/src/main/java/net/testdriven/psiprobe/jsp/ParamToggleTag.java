@@ -12,27 +12,26 @@ package net.testdriven.psiprobe.jsp;
 
 import java.io.IOException;
 import java.util.Enumeration;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.ServletRequestUtils;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
 public class ParamToggleTag extends TagSupport {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Log logger = LogFactory.getLog(getClass());
     private String param = "size";
 
-    public int doStartTag() throws JspException {
+    @Override
+	public int doStartTag() throws JspException {
         boolean getSize = ServletRequestUtils.getBooleanParameter(pageContext.getRequest(), param, false);
         StringBuffer query = new StringBuffer();
         query.append(param).append("=").append(!getSize);

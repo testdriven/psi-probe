@@ -19,14 +19,11 @@ import java.util.regex.PatternSyntaxException;
 /**
  * Data model class used by session search feature of application session
  * screen.
- * 
+ *
  * @author Andy Shapoval
  * @author Vlad Ilyushchenko
  */
 public class SessionSearchInfo implements Serializable {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public static final String SESS_ATTR_NAME = "sessionSearchInfo";
     public static final String ACTION_NONE = "none";

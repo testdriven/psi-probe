@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.catalina.util.ServerInfo;
 
 /**
@@ -23,10 +24,6 @@ import org.apache.catalina.util.ServerInfo;
  * @author Vlad Ilyushchenko
  */
 public class SystemInformation implements Serializable {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String appBase;
     private String configBase;

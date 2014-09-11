@@ -17,6 +17,7 @@ import net.testdriven.psiprobe.tools.logging.log4j.Log4JLoggerAccessor;
 /**
  *
  * @author Mark Lewis
+ * @author Matthias Hryniszak
  */
 public class GetSingleDestinationVisitor extends LoggerAccessorVisitor {
 

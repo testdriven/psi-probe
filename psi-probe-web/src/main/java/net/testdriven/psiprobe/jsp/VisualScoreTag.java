@@ -12,23 +12,21 @@ package net.testdriven.psiprobe.jsp;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyContent;
 import javax.servlet.jsp.tagext.BodyTagSupport;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
 public class VisualScoreTag extends BodyTagSupport {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	protected Log log = LogFactory.getLog(getClass());
@@ -43,7 +41,8 @@ public class VisualScoreTag extends BodyTagSupport {
     private boolean showA = false;
     private boolean showB = false;
 
-    public int doAfterBody() throws JspException {
+    @Override
+	public int doAfterBody() throws JspException {
 
         if (value < minValue) {
             log.info("value " + value + " is less than min value " + minValue);

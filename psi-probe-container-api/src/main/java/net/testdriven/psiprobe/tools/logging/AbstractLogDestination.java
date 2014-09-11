@@ -19,19 +19,23 @@ import java.sql.Timestamp;
  */
 public abstract class AbstractLogDestination extends DefaultAccessor implements LogDestination {
 
-    public boolean isRoot() {
+    @Override
+	public boolean isRoot() {
         return false;
     }
 
-    public boolean isContext() {
+    @Override
+	public boolean isContext() {
         return false;
     }
 
-    public String getIndex() {
+    @Override
+	public String getIndex() {
         return null;
     }
 
-    public String getConversionPattern() {
+    @Override
+	public String getConversionPattern() {
         return null;
     }
 
@@ -40,26 +44,30 @@ public abstract class AbstractLogDestination extends DefaultAccessor implements 
         return f.exists() ? f : new File("stdout");
     }
 
-    public File getFile() {
+    @Override
+	public File getFile() {
         return getStdoutFile();
     }
 
-    public long getSize() {
+    @Override
+	public long getSize() {
         File f = getFile();
         return f != null && f.exists() ? f.length() : 0;
     }
 
-    public Timestamp getLastModified() {
+    @Override
+	public Timestamp getLastModified() {
         File f = getFile();
         return f != null && f.exists() ? new Timestamp(f.lastModified()) : null;
     }
 
-    public String getLevel() {
+    @Override
+	public String getLevel() {
         return null;
     }
 
-    public String[] getValidLevels() {
+    @Override
+	public String[] getValidLevels() {
         return null;
     }
-
 }

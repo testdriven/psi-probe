@@ -13,7 +13,7 @@ package net.testdriven.psiprobe.tools.logging;
 import java.io.File;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
@@ -22,7 +22,8 @@ public class FileLogAccessor extends AbstractLogDestination {
     private String name;
     private File file;
 
-    public String getName() {
+    @Override
+	public String getName() {
         return name;
     }
 
@@ -30,24 +31,27 @@ public class FileLogAccessor extends AbstractLogDestination {
         this.name = name;
     }
 
-    public String getTargetClass() {
+    @Override
+	public String getTargetClass() {
         return "stdout";
     }
 
-    public String getLogType() {
+    @Override
+	public String getLogType() {
         return "stdout";
     }
 
-    public String getConversionPattern() {
+    @Override
+	public String getConversionPattern() {
         return "";
     }
 
-    public File getFile() {
+    @Override
+	public File getFile() {
         return file;
     }
 
     public void setFile(File file) {
         this.file = file;
     }
-
 }

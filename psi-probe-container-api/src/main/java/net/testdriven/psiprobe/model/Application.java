@@ -14,15 +14,12 @@ import java.io.Serializable;
 
 /**
  * POJO representing Tomcat's web application.
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Andy Shapoval
  * @author Mark Lewis
  */
 public class Application implements Serializable {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
     private String displayName;

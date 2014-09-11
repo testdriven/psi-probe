@@ -15,13 +15,10 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  */
 public class Item implements Serializable {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**

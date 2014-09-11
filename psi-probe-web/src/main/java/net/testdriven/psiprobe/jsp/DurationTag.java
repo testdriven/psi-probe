@@ -11,22 +11,20 @@
 package net.testdriven.psiprobe.jsp;
 
 import java.io.IOException;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
  * Silly JSP tag to display duration in milliseconds as hours:minutes:seconds.milliseconds
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
 public class DurationTag extends TagSupport {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private static Log logger = LogFactory.getLog(DurationTag.class);
@@ -37,7 +35,8 @@ public class DurationTag extends TagSupport {
         this.value = value;
     }
 
-    public int doStartTag() throws JspException {
+    @Override
+	public int doStartTag() throws JspException {
         try {
             pageContext.getOut().write(duration(value));
         } catch (IOException e) {

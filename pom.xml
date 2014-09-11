@@ -97,7 +97,32 @@
 				<artifactId>psi-probe-tomcat70</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-		
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>psi-probe-logging-catalina</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>psi-probe-logging-commons</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>psi-probe-logging-jdk14</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>psi-probe-logging-log4j</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>psi-probe-logging-logback</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>servlet-api</artifactId>
@@ -482,11 +507,11 @@
 						</execution>
 					</executions>
 					<dependencies>
-                        <dependency>
-                            <groupId>org.codehaus.mojo.jspc</groupId>
-                            <artifactId>jspc-compiler-tomcat6</artifactId>
-                            <version>2.0-alpha-3</version>
-                        </dependency>
+						<dependency>
+							<groupId>org.codehaus.mojo.jspc</groupId>
+							<artifactId>jspc-compiler-tomcat6</artifactId>
+							<version>2.0-alpha-3</version>
+						</dependency>
 					</dependencies>
 				</plugin>
 
@@ -539,7 +564,7 @@
 						</systemProperties>
 					</configuration>
 					<dependencies>
-                        <dependency>
+						<dependency>
 							<groupId>mysql</groupId>
 							<artifactId>mysql-connector-java</artifactId>
 							<version>${mysql.connector.version}</version>
@@ -585,6 +610,13 @@
 
 	<modules>
 		<module>psi-probe-container-api</module>
+
+		<module>psi-probe-logging-catalina</module>
+		<module>psi-probe-logging-commons</module>
+		<module>psi-probe-logging-jdk14</module>
+		<module>psi-probe-logging-log4j</module>
+		<module>psi-probe-logging-logback</module>
+
 		<module>psi-probe-tomcat60</module>
 		<module>psi-probe-tomcat70</module>
 		<module>psi-probe-web</module>

@@ -11,14 +11,10 @@
 package net.testdriven.psiprobe.model.jsp;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  */
 public class CompilerException extends Exception {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public CompilerException() {

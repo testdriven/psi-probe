@@ -16,13 +16,10 @@ import java.util.List;
 
 /**
  * A class to store data source test tool related data in a session attribute.
- * 
+ *
  * @author Andy Shapoval
  */
 public class DataSourceTestInfo implements Serializable {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public static final String DS_TEST_SESS_ATTR = "dataSourceTestData";

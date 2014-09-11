@@ -10,14 +10,16 @@
  */
 package net.testdriven.psiprobe.tools.logging.jdk;
 
-import net.testdriven.psiprobe.tools.logging.DefaultAccessor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.testdriven.psiprobe.tools.logging.DefaultAccessor;
+
 import org.apache.commons.beanutils.MethodUtils;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
@@ -25,8 +27,8 @@ public class Jdk14LoggerAccessor extends DefaultAccessor {
 
     private boolean context = false;
 
-    public List getHandlers() {
-        List handlerAccessors = new ArrayList();
+    public List<Jdk14HandlerAccessor> getHandlers() {
+        List<Jdk14HandlerAccessor> handlerAccessors = new ArrayList<>();
         try {
             Object handlers[] = (Object[]) MethodUtils.invokeMethod(getTarget(), "getHandlers", null);
             for (int h = 0; h < handlers.length; h++) {

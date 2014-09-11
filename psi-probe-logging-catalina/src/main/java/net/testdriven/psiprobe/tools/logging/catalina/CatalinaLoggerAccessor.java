@@ -10,32 +10,36 @@
  */
 package net.testdriven.psiprobe.tools.logging.catalina;
 
-import net.testdriven.psiprobe.tools.Instruments;
-import net.testdriven.psiprobe.tools.logging.AbstractLogDestination;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import net.testdriven.psiprobe.tools.Instruments;
+import net.testdriven.psiprobe.tools.logging.AbstractLogDestination;
+
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
 public class CatalinaLoggerAccessor extends AbstractLogDestination {
-
-    public boolean isContext() {
+    @Override
+	public boolean isContext() {
         return true;
     }
 
-    public String getName() {
+    @Override
+	public String getName() {
         return null;
     }
 
-    public String getLogType() {
+    @Override
+	public String getLogType() {
         return "catalina";
     }
 
-    public File getFile() {
+    @Override
+	public File getFile() {
         String dir = (String) invokeMethod(getTarget(), "getDirectory", null, null);
         String prefix = (String) invokeMethod(getTarget(), "getPrefix", null, null);
         String suffix = (String) invokeMethod(getTarget(), "getSuffix", null, null);
@@ -49,5 +53,4 @@ public class CatalinaLoggerAccessor extends AbstractLogDestination {
             return file;
         }
     }
-
 }

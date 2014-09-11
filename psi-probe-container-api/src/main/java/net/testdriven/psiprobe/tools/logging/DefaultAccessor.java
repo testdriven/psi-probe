@@ -11,13 +11,14 @@
 package net.testdriven.psiprobe.tools.logging;
 
 import net.testdriven.psiprobe.model.Application;
+
 import org.apache.commons.beanutils.MethodUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * 
+ *
  * @author Vlad Ilyushchenko
  * @author Mark Lewis
  */
@@ -67,5 +68,4 @@ public class DefaultAccessor {
             return defaultValue;
         }
     }
-
 }
