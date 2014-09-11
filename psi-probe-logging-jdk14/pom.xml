@@ -17,5 +17,9 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>psi-probe-container-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>psi-probe-logging</artifactId>
+		</dependency>
 	</dependencies>
 </project>

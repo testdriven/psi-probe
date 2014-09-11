@@ -32,6 +32,10 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>psi-probe-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>psi-probe-logging-catalina</artifactId>
 		</dependency>
 		<dependency>
